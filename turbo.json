@@ -9,6 +9,11 @@
     "dev": {
       "cache": false,
       "persistent": true
+    },
+    "typecheck": {
+      "dependsOn": ["^build"],
+      "inputs": ["**/*.ts", "**/*.tsx", "**/tsconfig*.json", "package.json"],
+      "outputs": []
     }
   }
 }
