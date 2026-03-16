@@ -14,12 +14,14 @@
     ".": {
       "import": "./dist/index.js",
       "types": "./dist/index.d.ts"
-    }
+    },
+    "./reset.css": "./dist/reset.css"
   },
   "files": [
     "dist",
     "docs",
-    "README.md"
+    "README.md",
+    "dist/reset.css"
   ],
   "author": "JustWon",
   "repository": {
