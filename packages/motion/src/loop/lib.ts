@@ -28,6 +28,7 @@ export function resolveDuration(
 ): number {
   let scale = 1;
 
+  // Bounce와 Swing 애니메이션은 자연스럽게 느껴지도록 배수를 적용
   if (name === "bounce" || name === "swing") scale = 3.3;
 
   if (duration === "fast") return Math.round(600 * scale);

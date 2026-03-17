@@ -13,14 +13,19 @@ export function loop({
 }: LoopAnimationOptions): CSSProperties {
   if (!isLooping) return {};
 
-  if (iterations !== "infinite" && iterations <= 0) {
-    iterations = "infinite";
+  let resolvedIterations = iterations;
+
+  if (resolvedIterations !== "infinite" && resolvedIterations <= 0) {
+    resolvedIterations = "infinite";
     if (process.env.NODE_ENV !== "production") {
       console.warn(
         `Invalid iteration value for animation "${name}". Defaulting to "infinite".`,
       );
     }
-  } else if (iterations === 1 && process.env.NODE_ENV !== "production") {
+  } else if (
+    resolvedIterations === 1 &&
+    process.env.NODE_ENV !== "production"
+  ) {
     console.warn(
       `Iteration value of 1 for animation "${name}" will not loop. Consider using a value greater than 1 or switch to a non-looping animation.`,
     );
@@ -30,7 +35,7 @@ export function loop({
     name,
     resolveTiming(name, easing),
     resolveDuration(name, duration),
-    iterations,
+    resolvedIterations,
     delay,
   );
 }
