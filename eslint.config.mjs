@@ -72,20 +72,6 @@ export default defineConfig([
     languageOptions: {
       globals: globals.browser,
     },
-    rules: {
-      "no-restricted-imports": [
-        "error",
-        {
-          patterns: [
-            {
-              group: ["@/*"],
-              message:
-                "Use relative imports within src/. The @/* alias is only for tests.",
-            },
-          ],
-        },
-      ],
-    },
   },
   {
     files: ["**/tests/**/*.{ts,tsx}"],
