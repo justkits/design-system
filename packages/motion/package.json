@@ -1,0 +1,49 @@
+{
+  "name": "@justkits/motion",
+  "description": "JustKits Design System - Motion",
+  "version": "0.0.0",
+  "private": false,
+  "type": "module",
+  "keywords": [
+    "animation",
+    "motion",
+    "css",
+    "react",
+    "typescript"
+  ],
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    },
+    "./keyframes.css": "./dist/keyframes.css"
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "author": "JustWon",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/justkits/design-system.git"
+  },
+  "publishConfig": {
+    "access": "restricted",
+    "registry": "https://npm.pkg.github.com/"
+  },
+  "scripts": {
+    "prebuild": "rm -rf dist",
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "typecheck": "tsc --noEmit"
+  },
+  "peerDependencies": {
+    "react": "^19.0.0"
+  },
+  "devDependencies": {
+    "@justkits/tsconfig": "workspace:*",
+    "@types/react": "^19.2.14",
+    "tsup": "^8.5.1",
+    "typescript": "~5.9.3"
+  }
+}
