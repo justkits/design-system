@@ -3,7 +3,8 @@
   "compilerOptions": {
     "paths": {
       "@/*": ["./src/*"]
-    }
+    },
+    "types": ["vitest/globals", "node"]
   },
   "include": ["src", "tests", "vitest.config.ts", "tsup.config.ts"]
 }

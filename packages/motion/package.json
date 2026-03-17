@@ -42,7 +42,6 @@
   },
   "devDependencies": {
     "@justkits/tsconfig": "workspace:*",
-    "@types/react": "^19.2.14",
     "tsup": "^8.5.1",
     "typescript": "~5.9.3"
   }
