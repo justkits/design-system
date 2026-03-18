@@ -1,0 +1,17 @@
+export type PresetKeyframesNames =
+  | "fade-in"
+  | "fade-out"
+  | "pop-in"
+  | "pop-out"
+  | "slide-up-in"
+  | "slide-up-out"
+  | "slide-down-in"
+  | "slide-down-out"
+  | "slide-left-in"
+  | "slide-left-out"
+  | "slide-right-in"
+  | "slide-right-out"
+  | "rotate-cw"
+  | "rotate-ccw"
+  | "bounce"
+  | "swing";
