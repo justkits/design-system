@@ -9,13 +9,6 @@ const config = defineProject({
       "@": resolve(__dirname, "src"),
     },
   },
-  test: {
-    exclude: [
-      "src/tokens/typography/code.ts",
-      "src/tokens/typography/quote.ts",
-      "src/tokens/typography/text.ts",
-    ],
-  },
 });
 
 export default mergeConfig(sharedConfig, config);
