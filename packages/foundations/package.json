@@ -20,18 +20,19 @@
   "files": [
     "dist",
     "docs",
-    "README.md",
-    "dist/reset.css"
+    "README.md"
   ],
   "author": "JustWon",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/justkits/design-system.git"
+    "url": "git+https://github.com/justkits/design-system.git",
+    "directory": "packages/foundations"
   },
   "publishConfig": {
     "access": "restricted",
     "registry": "https://npm.pkg.github.com/"
   },
+  "license": "SEE LICENSE IN REPOSITORY",
   "scripts": {
     "prebuild": "rm -rf dist",
     "build": "tsup",

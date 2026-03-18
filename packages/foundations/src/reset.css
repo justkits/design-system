@@ -1,9 +1,3 @@
-/** 
- * Reset CSS
- * 모든 요소의 기본 스타일을 초기화하여 일관된 스타일링을 가능하게 한다.
- * 기본적인 Reset 외에도, 개인 취향이 반영된 스타일링이 포함되어 있다.
- */
-
 /* 기본 스타일 초기화 */
 *,
 *::before,
@@ -19,27 +13,6 @@ body {
   font-family: system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   -webkit-text-size-adjust: 100%;
   /* 모바일 브라우저에서 텍스트 크기 자동 조정 방지 */
-}
-
-/* ThemeScript가 추가하는 클래스: 초기 페이지 로드 시 전환 애니메이션 방지 */
-html.theme-ready,
-html.theme-ready body {
-  transition:
-    background-color 0.3s ease,
-    color 0.3s ease;
-}
-
-/* 개인 취향에 따른 스타일링: 다크 모드 지원 */
-html {
-  color-scheme: light dark;
-}
-
-html[data-theme="dark"] {
-  color-scheme: dark;
-}
-
-html[data-theme="light"] {
-  color-scheme: light;
 }
 
 /* 타이포그래피 */
@@ -96,17 +69,13 @@ button,
 input,
 select,
 textarea {
-  font-family: inherit; /* eslint-disable-line css/font-family-fallbacks */
+  /* eslint-disable-next-line css/font-family-fallbacks */
+  font-family: inherit;
   font-size: 100%;
   line-height: 1.5;
   margin: 0;
   border: none;
   background: none;
-}
-
-button,
-input {
-  overflow: visible;
 }
 
 button,
@@ -143,4 +112,16 @@ fieldset {
   border: none;
   padding: 0;
   margin: 0;
+}
+
+/* 링크 */
+a {
+  color: inherit;
+  text-decoration: inherit;
+}
+
+/* 테이블 */
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
 }
