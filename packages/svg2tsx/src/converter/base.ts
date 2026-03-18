@@ -27,6 +27,7 @@ export abstract class BaseSvgBuilder {
   private readonly baseDir: string;
   private readonly suffix: string;
   private readonly generateIndex: boolean;
+  protected readonly dryRun: boolean;
 
   private readonly MANIFEST_FILENAME = ".svg2tsx/manifest.json";
 
@@ -59,6 +60,7 @@ export abstract class BaseSvgBuilder {
     generateIndex: boolean = false,
     assetsDir: string = "assets",
     srcDir: string = "src",
+    dryRun: boolean = false,
   ) {
     this.baseDir = baseDir;
     this.ASSETS_DIR = resolve(this.baseDir, assetsDir);
@@ -71,6 +73,7 @@ export abstract class BaseSvgBuilder {
     this.options = options;
     this.suffix = suffix;
     this.generateIndex = generateIndex;
+    this.dryRun = dryRun;
   }
 
   /**
@@ -81,10 +84,18 @@ export abstract class BaseSvgBuilder {
   public async generate(): Promise<void> {
     const startTime = performance.now();
 
+    if (this.dryRun) {
+      logger.detail("🔍 [Dry Run] No files will be written or deleted.\n");
+    }
+
     logger.detail("---------------------------------------------------\n");
     await this.clean();
 
-    logger.success("Clean completed. Starting generation...\n");
+    if (this.dryRun) {
+      logger.success("[Dry Run] Clean step complete. Starting generation...\n");
+    } else {
+      logger.success("Clean completed. Starting generation...\n");
+    }
     await this.processSvgs();
 
     if (this.generateIndex) {
@@ -105,9 +116,15 @@ export abstract class BaseSvgBuilder {
 
     const count = this.nameRegistry.size;
 
-    logger.success(
-      `✨ [Success] Generated ${count} components in ${duration}s`,
-    );
+    if (this.dryRun) {
+      logger.success(
+        `🔍 [Dry Run] Would generate ${count} components in ${duration}s`,
+      );
+    } else {
+      logger.success(
+        `✨ [Success] Generated ${count} components in ${duration}s`,
+      );
+    }
   }
 
   // ================================================== //
@@ -126,7 +143,7 @@ export abstract class BaseSvgBuilder {
         .filter((p) => p.startsWith(this.SRC_DIR));
 
       for (const path of safeToDelete) {
-        await rm(path, { force: true });
+        await this.deleteFile(path);
       }
       logger.detail(`Cleaned up ${safeToDelete.length} files from manifest.`);
     } catch {
@@ -135,11 +152,32 @@ export abstract class BaseSvgBuilder {
   }
 
   private async saveManifest(): Promise<void> {
+    if (this.dryRun) return;
     const paths = Array.from(this.generatedFiles).map((p) =>
       relative(this.baseDir, p),
     );
     const manifestPath = resolve(this.baseDir, this.MANIFEST_FILENAME);
     await atomicWrite(manifestPath, JSON.stringify(paths, null, 2));
+  }
+
+  protected async writeFile(filePath: string, content: string): Promise<void> {
+    if (this.dryRun) {
+      logger.detail(
+        `[Dry Run] Would write: ${relative(this.baseDir, filePath)}`,
+      );
+      return;
+    }
+    await atomicWrite(filePath, content);
+  }
+
+  protected async deleteFile(filePath: string): Promise<void> {
+    if (this.dryRun) {
+      logger.detail(
+        `[Dry Run] Would delete: ${relative(this.baseDir, filePath)}`,
+      );
+      return;
+    }
+    await rm(filePath, { force: true });
   }
 
   protected trackGeneratedFile(filePath: string): void {

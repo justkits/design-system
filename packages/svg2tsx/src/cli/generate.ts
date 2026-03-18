@@ -4,7 +4,10 @@ import { StandaloneSvgBuilder } from "@converter/standalone";
 import { defaultOptions } from "@converter/options";
 import { logger } from "@lib/logger";
 
-export async function generateAction(options: { config?: string }) {
+export async function generateAction(options: {
+  config?: string;
+  dryRun?: boolean;
+}) {
   try {
     const config = await loadConfig(options.config);
 
@@ -18,6 +21,7 @@ export async function generateAction(options: { config?: string }) {
     const generateIndex = config.index ?? false;
     const assetsDir = config.assetsDir || "assets";
     const srcDir = config.srcDir || "src";
+    const dryRun = options.dryRun ?? false;
 
     let builder;
     if (config.type === "family") {
@@ -28,6 +32,7 @@ export async function generateAction(options: { config?: string }) {
         generateIndex,
         assetsDir,
         srcDir,
+        dryRun,
       );
     } else {
       builder = new StandaloneSvgBuilder(
@@ -37,6 +42,7 @@ export async function generateAction(options: { config?: string }) {
         generateIndex,
         assetsDir,
         srcDir,
+        dryRun,
       );
     }
 

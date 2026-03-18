@@ -3,7 +3,6 @@ import { Config } from "@svgr/core";
 
 import { BaseSvgBuilder } from "./base";
 import { logger } from "@lib/logger";
-import { atomicWrite } from "@lib/atomicWrite";
 
 /**
  * SVG -> React 컴포넌트 변환용 빌더 (Standalone 플랫 구조; Family 분류 없음)
@@ -29,8 +28,9 @@ export class StandaloneSvgBuilder extends BaseSvgBuilder {
     generateIndex: boolean = false,
     assetsDir: string = "assets",
     srcDir: string = "src",
+    dryRun: boolean = false,
   ) {
-    super(options, baseDir, suffix, generateIndex, assetsDir, srcDir);
+    super(options, baseDir, suffix, generateIndex, assetsDir, srcDir, dryRun);
   }
 
   protected printSummary(): void {
@@ -59,7 +59,7 @@ export class StandaloneSvgBuilder extends BaseSvgBuilder {
 
     const barrelContent = barrelLines.join("\n") + "\n";
     const barrelPath = join(this.SRC_DIR, "index.ts");
-    await atomicWrite(barrelPath, barrelContent);
+    await this.writeFile(barrelPath, barrelContent);
     this.trackGeneratedFile(barrelPath);
   }
 
@@ -70,8 +70,12 @@ export class StandaloneSvgBuilder extends BaseSvgBuilder {
     const componentDir = join(this.SRC_DIR, "components");
     const componentPath = join(componentDir, `${componentName}.tsx`);
 
-    await atomicWrite(componentPath, content);
+    await this.writeFile(componentPath, content);
     this.trackGeneratedFile(componentPath);
-    logger.info(`Generated: ${componentName}`);
+    if (this.dryRun) {
+      logger.info(`[Dry Run] Would generate: ${componentName}`);
+    } else {
+      logger.info(`Generated: ${componentName}`);
+    }
   }
 }

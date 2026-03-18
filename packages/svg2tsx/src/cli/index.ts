@@ -15,6 +15,7 @@ program
   .command("generate")
   .description("Generate React components from SVG files")
   .option("-c, --config <path>", "path to config file")
+  .option("--dry-run", "preview changes without writing any files")
   .action(generateAction);
 
 program.parse();

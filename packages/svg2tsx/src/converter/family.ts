@@ -3,7 +3,6 @@ import { Config } from "@svgr/core";
 
 import { BaseSvgBuilder } from "./base";
 import { logger } from "@lib/logger";
-import { atomicWrite } from "@lib/atomicWrite";
 
 /**
  * SVG -> React 컴포넌트 변환용 빌더 (Family 분류를 포함)
@@ -31,8 +30,9 @@ export class FamilySvgBuilder extends BaseSvgBuilder {
     generateIndex: boolean = false,
     assetsDir: string = "assets",
     srcDir: string = "src",
+    dryRun: boolean = false,
   ) {
-    super(options, baseDir, suffix, generateIndex, assetsDir, srcDir);
+    super(options, baseDir, suffix, generateIndex, assetsDir, srcDir, dryRun);
     this.exportMap = {};
   }
 
@@ -71,13 +71,13 @@ export class FamilySvgBuilder extends BaseSvgBuilder {
       const familyBarrelContent = familyBarrelLines.join("\n") + "\n";
 
       const familyBarrelPath = join(this.SRC_DIR, familyName, "index.ts");
-      await atomicWrite(familyBarrelPath, familyBarrelContent);
+      await this.writeFile(familyBarrelPath, familyBarrelContent);
       this.trackGeneratedFile(familyBarrelPath);
     }
 
     const rootBarrelContent = rootBarrelLines.join("\n") + "\n";
     const rootBarrelPath = join(this.SRC_DIR, "index.ts");
-    await atomicWrite(rootBarrelPath, rootBarrelContent);
+    await this.writeFile(rootBarrelPath, rootBarrelContent);
     this.trackGeneratedFile(rootBarrelPath);
   }
 
@@ -99,13 +99,17 @@ export class FamilySvgBuilder extends BaseSvgBuilder {
       familyName,
       `components/${componentName}.tsx`,
     );
-    await atomicWrite(componentPath, content);
+    await this.writeFile(componentPath, content);
     this.trackGeneratedFile(componentPath);
 
     if (!this.exportMap[familyName]) {
       this.exportMap[familyName] = [];
     }
     this.exportMap[familyName].push(componentName);
-    logger.info(`Generated: ${familyName}/${componentName}`);
+    if (this.dryRun) {
+      logger.info(`[Dry Run] Would generate: ${familyName}/${componentName}`);
+    } else {
+      logger.info(`Generated: ${familyName}/${componentName}`);
+    }
   }
 }
