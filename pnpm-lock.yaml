@@ -95,6 +95,9 @@ importers:
       '@justkits/design-foundations':
         specifier: workspace:*
         version: link:../../packages/foundations
+      '@justkits/headless-ui':
+        specifier: workspace:*
+        version: link:../../packages/headless-ui
       react:
         specifier: ^19.2.4
         version: 19.2.4
