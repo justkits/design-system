@@ -58,6 +58,7 @@ function arrow(
     width: 8,
     height: 8,
     backgroundColor: "inherit",
+    zIndex: ZIndices.tooltip,
   };
 
   if (placement === "top") {
