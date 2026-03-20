@@ -7,5 +7,6 @@ describe("App", () => {
     const { getByText } = render(<App />);
 
     expect(getByText("Tester App"));
+    expect(getByText("TestArea"));
   });
 });
