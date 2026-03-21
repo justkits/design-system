@@ -5,6 +5,7 @@ import { ZIndices } from "@/_zindex";
 
 const wrapper: CSSProperties = {
   position: "relative",
+  width: "fit-content",
 };
 
 function tooltip(

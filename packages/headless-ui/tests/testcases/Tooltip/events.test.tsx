@@ -1,25 +1,6 @@
 import { act, fireEvent, render } from "@testing-library/react";
-import { useState } from "react";
 
-import { Tooltip } from "@/Tooltip";
-import { TestComponent } from "./_setup";
-
-function TwoTooltips() {
-  const [open1, setOpen1] = useState(true);
-  const [open2, setOpen2] = useState(true);
-  return (
-    <>
-      <Tooltip isOpen={open1} onOpenChange={setOpen1}>
-        <Tooltip.Trigger>첫 번째 트리거</Tooltip.Trigger>
-        <Tooltip.Content>첫 번째 툴팁</Tooltip.Content>
-      </Tooltip>
-      <Tooltip isOpen={open2} onOpenChange={setOpen2}>
-        <Tooltip.Trigger>두 번째 트리거</Tooltip.Trigger>
-        <Tooltip.Content>두 번째 툴팁</Tooltip.Content>
-      </Tooltip>
-    </>
-  );
-}
+import { TestComponent, TwoTooltips } from "./_setup";
 
 describe("Tooltip - events", () => {
   beforeEach(() => {
