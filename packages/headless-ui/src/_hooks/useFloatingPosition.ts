@@ -6,7 +6,7 @@ const OFFSET = 16; // 요소와 화면 가장자리 사이의 최소 간격
 
 export function useFloatingPosition(
   triggerRef: RefObject<HTMLElement | null>,
-  floatingRef: RefObject<HTMLDivElement | null>,
+  floatingRef: RefObject<HTMLElement | null>,
   defaultPlacement: FloatingPlacement,
   isOpen: boolean = false,
 ) {
