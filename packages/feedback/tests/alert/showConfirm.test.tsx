@@ -39,6 +39,24 @@ describe("Alert - showConfirm", () => {
     expect(queryByText("This is a test confirm message")).toBeFalsy();
   });
 
+  it("should display custom confirmText and cancelText", async () => {
+    const { getByText } = render(<TestComponent />);
+
+    act(() => {
+      showConfirm(
+        "Test Confirm",
+        "This is a test confirm message",
+        vi.fn(),
+        undefined,
+        "네",
+        "아니요",
+      );
+    });
+
+    expect(getByText("네")).toBeTruthy();
+    expect(getByText("아니요")).toBeTruthy();
+  });
+
   it("should handle cancel (no callback)", async () => {
     const { getByText, queryByText } = render(<TestComponent />);
 
