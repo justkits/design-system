@@ -22,7 +22,7 @@ export const TooltipContext = createContext<TooltipContextType | undefined>(
 export function useTooltip() {
   const context = useContext(TooltipContext);
   if (!context) {
-    throw new Error("useTooltip must be used within Tooltip");
+    throw new Error("Tooltip Components must be used within Tooltip");
   }
   return context;
 }

@@ -9,7 +9,7 @@ describe("Popover - context errors", () => {
       .mockImplementation(() => {});
 
     expect(() => render(<Popover.Trigger>트리거</Popover.Trigger>)).toThrow(
-      "usePopover must be used within Popover",
+      "Popover Components must be used within the Popover wrapper",
     );
 
     consoleErrorSpy.mockRestore();
@@ -21,7 +21,7 @@ describe("Popover - context errors", () => {
       .mockImplementation(() => {});
 
     expect(() => render(<Popover.Content>내용</Popover.Content>)).toThrow(
-      "usePopover must be used within Popover",
+      "Popover Components must be used within the Popover wrapper",
     );
 
     consoleErrorSpy.mockRestore();
@@ -38,7 +38,7 @@ describe("Popover - context errors", () => {
           <Popover.Arrow />
         </Popover>,
       ),
-    ).toThrow("Must be used within PopoverContent");
+    ).toThrow("Popover.Arrow must be used within Popover.Content");
 
     consoleErrorSpy.mockRestore();
   });
