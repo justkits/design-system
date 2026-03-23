@@ -9,7 +9,7 @@ describe("Tooltip - context errors", () => {
       .mockImplementation(() => {});
 
     expect(() => render(<Tooltip.Trigger>트리거</Tooltip.Trigger>)).toThrow(
-      "useTooltip must be used within Tooltip",
+      "Tooltip Components must be used within Tooltip",
     );
 
     consoleErrorSpy.mockRestore();
@@ -21,7 +21,7 @@ describe("Tooltip - context errors", () => {
       .mockImplementation(() => {});
 
     expect(() => render(<Tooltip.Content>내용</Tooltip.Content>)).toThrow(
-      "useTooltip must be used within Tooltip",
+      "Tooltip Components must be used within Tooltip",
     );
 
     consoleErrorSpy.mockRestore();
@@ -39,7 +39,7 @@ describe("Tooltip - context errors", () => {
           <Tooltip.Arrow />
         </Tooltip>,
       ),
-    ).toThrow("TooltipArrow must be used within TooltipContent");
+    ).toThrow("Tooltip.Arrow must be used within Tooltip.Content");
 
     consoleErrorSpy.mockRestore();
   });
