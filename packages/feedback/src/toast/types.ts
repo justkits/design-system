@@ -17,3 +17,7 @@ export interface ToastObject {
 export type ToastsComponentProps = {
   toasts: ToastObject[];
 };
+
+export type ToastItemProps = {
+  toast: ToastObject;
+};

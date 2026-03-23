@@ -14,5 +14,6 @@ export type {
 export type {
   ToastObject,
   ToastType,
+  ToastItemProps,
   ToastsComponentProps,
 } from "./toast/types";
