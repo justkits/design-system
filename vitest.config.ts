@@ -4,7 +4,6 @@ export default defineConfig({
   test: {
     projects: ["apps/*", "packages/*"],
     coverage: {
-      include: ["packages/*/src/**/*.{ts,tsx}", "apps/*/src/**/*.{ts,tsx}"],
       exclude: [
         "apps/*/src/**/index.ts",
         "apps/*/src/**/main.ts",
