@@ -1,6 +1,6 @@
 import { type HTMLAttributes, useContext } from "react";
-import { createPortal } from "react-dom";
 
+import { Portal } from "@/core/portal";
 import { ContentContext, useAlert } from "./internals/context";
 import { styles } from "./internals/styles";
 
@@ -26,10 +26,10 @@ export function AlertOverlay({
   const overlay = (
     <div
       className={className}
-      style={{ ...style, ...styles.overlay }}
+      style={{ ...styles.overlay, ...style }}
       {...rest}
     />
   );
 
-  return isPortalMode ? createPortal(overlay, document.body) : overlay;
+  return <Portal isPortalMode={isPortalMode}>{overlay}</Portal>;
 }

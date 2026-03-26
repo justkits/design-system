@@ -1,6 +1,6 @@
 import { type HTMLAttributes } from "react";
-import { createPortal } from "react-dom";
 
+import { Portal } from "@/core/portal";
 import { ContentContext, useAlert } from "./internals/context";
 import { styles } from "./internals/styles";
 
@@ -28,7 +28,7 @@ export function AlertContent({
         ref={wrapperRef}
         id={contentId}
         className={className}
-        style={{ ...style, ...styles.alert }}
+        style={{ ...styles.alert, ...style }}
         role="alertdialog"
         tabIndex={-1}
         aria-modal="true"
@@ -43,5 +43,5 @@ export function AlertContent({
     </ContentContext.Provider>
   );
 
-  return isPortalMode ? createPortal(content, document.body) : content;
+  return <Portal isPortalMode={isPortalMode}>{content}</Portal>;
 }
