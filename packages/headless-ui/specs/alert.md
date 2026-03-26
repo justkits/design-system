@@ -3,6 +3,7 @@
 ## Structure
 
 - `Alert`
+  - [x] SSR 환경에서도 문제없이 동작해야 한다.
   - [x] "portal" property를 지원해야 한다.
   - `Alert.Content`
     - [x] `Alert` 안에서 사용해야 한다.
