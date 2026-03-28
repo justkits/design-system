@@ -26,8 +26,8 @@ export function TooltipArrow({
   return (
     <div
       style={{
-        ...style,
         ...styles.arrow(placement, shiftX, shiftY),
+        ...style,
       }}
       className={className}
       {...rest}
