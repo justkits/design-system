@@ -7,6 +7,7 @@ type TooltipTriggerProps = {
   asChild?: boolean;
 } & Omit<
   ButtonHTMLAttributes<HTMLButtonElement>,
+  | "type"
   | "aria-describedby"
   | "disabled"
   | "onMouseEnter"
@@ -45,10 +46,9 @@ export function TooltipTrigger({
   if (asChild) {
     return (
       <AsChild
-        type="button"
         {...rest}
         ref={triggerRef as RefObject<HTMLButtonElement>}
-        aria-describedby={tooltipId}
+        aria-describedby={disabled ? undefined : tooltipId}
         disabled={disabled}
         onMouseEnter={() => showTooltip(openDelay)}
         onMouseLeave={() => hideTooltip(closeDelay)}
@@ -65,7 +65,7 @@ export function TooltipTrigger({
       type="button"
       {...rest}
       ref={triggerRef as RefObject<HTMLButtonElement>}
-      aria-describedby={tooltipId}
+      aria-describedby={disabled ? undefined : tooltipId}
       disabled={disabled}
       onMouseEnter={() => showTooltip(openDelay)}
       onMouseLeave={() => hideTooltip(closeDelay)}
