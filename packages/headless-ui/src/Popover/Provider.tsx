@@ -36,7 +36,7 @@ export function Provider({
   const contentId = useId();
   const [titleId, setTitleId] = useState<string | undefined>(undefined);
 
-  useClickOutside(floatingRef, hidePopover, isOpen);
+  useClickOutside(floatingRef, hidePopover, isOpen, triggerRef);
   useKeyboardEvent("Escape", hidePopover, isOpen);
   useFocusTrap(floatingRef, isOpen, triggerRef);
 

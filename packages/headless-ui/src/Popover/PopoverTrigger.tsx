@@ -15,7 +15,8 @@ export function PopoverTrigger({
   asChild = false,
   ...rest
 }: Readonly<PopoverTriggerProps>) {
-  const { isOpen, showPopover, contentId, triggerRef } = usePopover();
+  const { isOpen, showPopover, hidePopover, contentId, triggerRef } =
+    usePopover();
 
   const isInsideContent = useContext(ContentContext);
 
@@ -25,6 +26,8 @@ export function PopoverTrigger({
     );
   }
 
+  const handleClick = isOpen ? hidePopover : showPopover;
+
   if (asChild) {
     return (
       <AsChild
@@ -33,7 +36,7 @@ export function PopoverTrigger({
         aria-controls={contentId}
         aria-haspopup="dialog"
         aria-expanded={isOpen}
-        onClick={showPopover}
+        onClick={handleClick}
       >
         {children}
       </AsChild>
@@ -48,7 +51,7 @@ export function PopoverTrigger({
       aria-haspopup="dialog"
       aria-expanded={isOpen}
       type="button"
-      onClick={showPopover}
+      onClick={handleClick}
     >
       {children}
     </button>
