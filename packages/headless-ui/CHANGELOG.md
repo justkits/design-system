@@ -1,5 +1,11 @@
 # @justkits/headless-ui
 
+## 0.2.0
+
+### Minor Changes
+
+- [#46](https://github.com/justkits/design-system/pull/46) [`a0ef1dd`](https://github.com/justkits/design-system/commit/a0ef1dde2de8a9f1118106fbd4ace6bd716bf872) Thanks [@justwon0307](https://github.com/justwon0307)! - Release the Popover component.
+
 ## 0.1.1
 
 ### Patch Changes
