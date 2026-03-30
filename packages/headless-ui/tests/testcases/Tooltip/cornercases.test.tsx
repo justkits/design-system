@@ -86,7 +86,7 @@ describe("Tooltip - corner cases", () => {
       vi.restoreAllMocks();
     });
 
-    it("flips bottom -> top and shifts left (negavite shiftX)", () => {
+    it("flips bottom -> top and shifts left (negative shiftX)", () => {
       // bottom→top flip, offset=16: naturalX=780+10-10=780, y=580-20-16=544
       // shiftX: 780+20=800 > 800-16=784 → shiftX=784-20-780=-16 → x=764, y=544
       const { tooltip, arrow } = renderAndHover("bottom", 16);
@@ -95,7 +95,7 @@ describe("Tooltip - corner cases", () => {
       checkArrowPosition(arrow, "top", -16);
     });
 
-    it("flips right -> left and shifts up (negavite shiftY)", () => {
+    it("flips right -> left and shifts up (negative shiftY)", () => {
       // right→left flip, offset=16: x=780-20-16=744, naturalY=580+10-10=580
       // shiftY: 580+20=600 > 600-16=584 → shiftY=584-20-580=-16 → x=744, y=564
       const { tooltip, arrow } = renderAndHover("right", 16);
