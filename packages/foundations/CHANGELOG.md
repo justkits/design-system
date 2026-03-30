@@ -1,5 +1,11 @@
 # @justkits/design-foundations
 
+## 1.1.0
+
+### Minor Changes
+
+- [#52](https://github.com/justkits/design-system/pull/52) [`fc1d2ec`](https://github.com/justkits/design-system/commit/fc1d2ec7d22cc32e98576011bc0ae676cd6fa0f5) Thanks [@justwon0307](https://github.com/justwon0307)! - Add dialog reset to reset.css
+
 ## 1.0.0
 
 ### Major Changes
