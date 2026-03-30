@@ -1,5 +1,11 @@
 # @justkits/headless-ui
 
+## 0.2.1
+
+### Patch Changes
+
+- [#50](https://github.com/justkits/design-system/pull/50) [`0a729dc`](https://github.com/justkits/design-system/commit/0a729dc0b30318549e0a8adfe761cb79f41c655b) Thanks [@justwon0307](https://github.com/justwon0307)! - Update docs, and minor bug fixes on Alert component
+
 ## 0.2.0
 
 ### Minor Changes
