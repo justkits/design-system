@@ -19,6 +19,16 @@ describe("Popover - aria", () => {
       const title = getByTestId("popover-title");
       expect(content.getAttribute("aria-labelledby")).toBe(title.id);
     });
+
+    it("Popover.Content's aria-labelledby is undefined if Popover.Title is not rendered", () => {
+      const { getByTestId } = render(<TestComponent omit="title" />);
+
+      // Trigger를 클릭하여 Popover를 연다
+      fireEvent.click(getByTestId("popover-trigger"));
+
+      const content = getByTestId("popover-content");
+      expect(content.getAttribute("aria-labelledby")).toBeNull();
+    });
   });
 
   describe("Attributes", () => {

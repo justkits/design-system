@@ -9,7 +9,7 @@ export function TestComponent({
   position,
   offset,
 }: Readonly<{
-  omit?: "trigger" | "overlay" | "content" | "button";
+  omit?: "trigger" | "overlay" | "content" | "button" | "title";
   portal?: boolean;
   position?: FloatingPlacement;
   offset?: number;
@@ -24,9 +24,11 @@ export function TestComponent({
         )}
         {omit !== "content" && (
           <Popover.Content data-testid="popover-content">
-            <Popover.Title data-testid="popover-title">
-              팝오버 제목
-            </Popover.Title>
+            {omit !== "title" && (
+              <Popover.Title data-testid="popover-title">
+                팝오버 제목
+              </Popover.Title>
+            )}
             {omit !== "button" && (
               <Popover.Close data-testid="popover-button">닫기</Popover.Close>
             )}

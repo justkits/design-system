@@ -26,6 +26,7 @@
 - ID
   - [x] `Popover.Content`의 ID와 `Popover.Trigger`의 `aria-controls`가 자동으로 연결된다.
   - [x] `Popover.Title`의 ID와 `Popover.Content`의 `aria-labelledby`가 자동으로 연결된다.
+  - [x] `Popover.Title`이 없으면 `aria-labelledby`는 설정하지 않는다.
 - Attributes
   - [x] `Popover.Trigger`가 `aria-haspopup="dialog"`를 가진다.
   - [x] `Popover.Trigger`가 `aria-expanded`를 가지며, 팝오버가 열리면 `"true"`, 닫히면 `"false"`가 된다.

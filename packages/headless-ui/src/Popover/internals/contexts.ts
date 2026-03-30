@@ -12,7 +12,8 @@ type PopoverContextValue = {
   isPortalMode: boolean;
   floatingStyles: { container: CSSProperties; arrow: CSSProperties };
   contentId: string;
-  titleId: string;
+  titleId: string | undefined;
+  setTitleId: (id: string | undefined) => void;
   triggerRef: RefObject<HTMLElement | null>;
   floatingRef: RefObject<HTMLDialogElement | null>;
 };

@@ -1,4 +1,4 @@
-import { type ReactNode, useId, useMemo, useRef } from "react";
+import { type ReactNode, useId, useMemo, useRef, useState } from "react";
 
 import { useClickOutside } from "@/core/clicks/useClickOutside";
 import { useFocusTrap } from "@/core/focus/useFocusTrap";
@@ -34,7 +34,7 @@ export function Provider({
   const triggerRef = useRef<HTMLElement | null>(null);
   const floatingRef = useRef<HTMLDialogElement | null>(null);
   const contentId = useId();
-  const titleId = useId();
+  const [titleId, setTitleId] = useState<string | undefined>(undefined);
 
   useClickOutside(floatingRef, hidePopover, isOpen);
   useKeyboardEvent("Escape", hidePopover, isOpen);
@@ -57,6 +57,7 @@ export function Provider({
       floatingStyles,
       contentId,
       titleId,
+      setTitleId,
       triggerRef,
       floatingRef,
     }),
@@ -68,6 +69,7 @@ export function Provider({
       floatingStyles,
       contentId,
       titleId,
+      setTitleId,
     ],
   );
 
