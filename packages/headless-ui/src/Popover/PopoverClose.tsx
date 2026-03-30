@@ -19,6 +19,7 @@ export function PopoverClose({
   style,
   onClick,
   asChild = false,
+  disabled,
   ...rest
 }: Readonly<PopoverCloseProps>) {
   const { hidePopover, isPending, setPending } = usePopover();
@@ -56,7 +57,7 @@ export function PopoverClose({
         className={className}
         style={style}
         {...rest}
-        disabled={isPending || rest.disabled}
+        disabled={isPending || disabled}
         onClick={handleClick}
       >
         {children}
@@ -70,7 +71,7 @@ export function PopoverClose({
       className={className}
       style={style}
       {...rest}
-      disabled={isPending || rest.disabled}
+      disabled={isPending || disabled}
       onClick={handleClick}
     >
       {children}
