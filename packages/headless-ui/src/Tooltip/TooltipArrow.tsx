@@ -13,7 +13,7 @@ export function TooltipArrow({
   className,
   style,
   ...rest
-}: Readonly<HTMLAttributes<HTMLDivElement>>) {
+}: Readonly<Omit<HTMLAttributes<HTMLDivElement>, "aria-hidden">>) {
   const { arrowStyles } = useTooltip();
 
   const isInsideContent = useContext(ContentContext);
