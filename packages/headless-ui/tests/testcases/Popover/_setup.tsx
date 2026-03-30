@@ -8,11 +8,13 @@ export function TestComponent({
   portal = false,
   position,
   offset,
+  onClose,
 }: Readonly<{
   omit?: "trigger" | "overlay" | "content" | "button" | "title";
   portal?: boolean;
   position?: FloatingPlacement;
   offset?: number;
+  onClose?: () => void | Promise<void>;
 }>) {
   return (
     <>
@@ -30,7 +32,9 @@ export function TestComponent({
               </Popover.Title>
             )}
             {omit !== "button" && (
-              <Popover.Close data-testid="popover-button">닫기</Popover.Close>
+              <Popover.Close data-testid="popover-button" onClick={onClose}>
+                닫기
+              </Popover.Close>
             )}
             <Popover.Arrow data-testid="popover-arrow" />
           </Popover.Content>

@@ -49,6 +49,11 @@
     - [x] 포커스 가능한 요소가 없으면 `Popover.Content` 자체로 포커스가 이동한다. (`tabindex="-1"`)
   - Return Focus
     - [x] 팝오버가 닫힐 때, `Popover.Trigger`로 포커스가 돌아온다.
+- Others
+  - Async Button Actions (`Popover.Close`의 `onClick`이 Promise를 반환)
+    - [x] 클릭 시 dialog가 닫히지 않고 pending 상태가 되며, `Popover.Content`에 `aria-busy="true"`가 설정된다. 또한, 모든 `Popover.Close`가 비활성화된다.
+    - [x] resolve되면 dialog가 자동으로 닫힌다.
+    - [x] reject되면 dialog가 닫히지 않는다.
 
 ## State
 

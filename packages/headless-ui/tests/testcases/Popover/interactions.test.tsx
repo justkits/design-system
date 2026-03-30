@@ -1,4 +1,4 @@
-import { fireEvent, render, waitFor } from "@testing-library/react";
+import { act, fireEvent, render, waitFor } from "@testing-library/react";
 
 import { Popover } from "@/Popover";
 import { setupConsoleSpy } from "../_setup";
@@ -144,6 +144,83 @@ describe("Popover - interactions", () => {
         // 외부 클릭으로 닫았을 때, Popover.Trigger로 포커스가 돌아와야 한다.
         fireEvent.mouseDown(getByTestId("outside-element"));
         await waitFor(() => expect(document.activeElement).toBe(trigger));
+      });
+    });
+  });
+
+  describe("Async Button Actions", () => {
+    it("stays open while pending and sets correct properties", async () => {
+      let resolvePromise!: () => void;
+      const onClose = () =>
+        new Promise<void>((resolve) => {
+          resolvePromise = resolve;
+        });
+      const { getByTestId, queryByTestId } = render(
+        <TestComponent onClose={onClose} />,
+      );
+
+      fireEvent.click(getByTestId("popover-trigger"));
+      expect(getByTestId("popover-content")).toBeTruthy();
+
+      const button = getByTestId("popover-button");
+      fireEvent.click(button);
+
+      // 버튼이 pending 상태일 때, Popover.Content가 닫히면 안 된다.
+      expect(queryByTestId("popover-content")).toBeTruthy();
+
+      // 버튼에 pending 속성이 true로 설정되어야 한다.
+      expect(getByTestId("popover-content").getAttribute("aria-busy")).toBe(
+        "true",
+      );
+
+      await act(async () => {
+        resolvePromise();
+      });
+
+      // Promise가 해결된 후, Popover.Content가 닫혀야 한다.
+      await waitFor(() => expect(queryByTestId("popover-content")).toBeNull());
+    });
+
+    it("closes on resolve", async () => {
+      let resolveAction!: () => void;
+      const onClose = () =>
+        new Promise<void>((resolve) => {
+          resolveAction = resolve;
+        });
+      const { getByTestId, queryByTestId } = render(
+        <TestComponent onClose={onClose} />,
+      );
+
+      fireEvent.click(getByTestId("popover-trigger"));
+      expect(getByTestId("popover-content")).toBeTruthy();
+
+      fireEvent.click(getByTestId("popover-button"));
+
+      await act(async () => {
+        resolveAction();
+      });
+
+      await waitFor(() => expect(queryByTestId("popover-content")).toBeNull());
+    });
+
+    it("stays open on reject", async () => {
+      const onClose = () => Promise.reject(new Error("실패"));
+      const { getByTestId, queryByTestId } = render(
+        <TestComponent onClose={onClose} />,
+      );
+
+      fireEvent.click(getByTestId("popover-trigger"));
+      expect(getByTestId("popover-content")).toBeTruthy();
+
+      fireEvent.click(getByTestId("popover-button"));
+
+      await waitFor(() => {
+        // Promise가 거부된 후에도 Popover.Content가 닫히면 안 된다.
+        expect(queryByTestId("popover-content")).toBeTruthy();
+
+        const content = getByTestId("popover-content");
+        // Popover.Content에 pending 관련 속성이 올바르게 설정되어야 한다.
+        expect(content.getAttribute("aria-busy")).toBe("false");
       });
     });
   });
