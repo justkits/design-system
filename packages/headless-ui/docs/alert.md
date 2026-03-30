@@ -3,6 +3,7 @@
 모달 형태의 Alert Dialog 컴포넌트. 유저의 즉각적인 주의가 필요하며, 확인이나 취소 등 명시적인 액션을 요구하는 모달 형태의 경고창 컴포넌트다. 포커스 관리, 스크롤 잠금, 키보드 접근성을 기본으로 제공하며, 일반적인 Modal과는 달리 Overlay를 클릭하거나 `Escape` 키를 눌러도 닫히지 않도록 강제한다.
 
 - **WAI-ARIA Reference**: [Alert Dialog](https://www.w3.org/WAI/ARIA/apg/patterns/alertdialog/)
+- **MDN References**: [aria-busy](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Reference/Attributes/aria-busy), [inert](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/inert)
 
 > 명령형으로 어디서든 알림을 띄우는 기능을 지원하는 `@justkits/feedback` 패키지와 함께 사용할 수 있다. (구체적인 사용 예시 등 자세한 내용은 [`@justkits/feedback`의 README` 파일](https://github.com/justkits/design-system/blob/main/packages/feedback/README.md)을 참고)
 
@@ -121,12 +122,12 @@ export function AlertComponent({ alert }: AlertComponentProps) {
 
 ### `Alert`
 
-| Prop           | Type                      | Default | Description                                                                           |
-| -------------- | ------------------------- | ------- | ------------------------------------------------------------------------------------- |
-| `children`     | `ReactNode`               | —       | Alert를 구성하는 하위 컴포넌트들                                                      |
-| `isOpen`       | `boolean`                 | —       | Controlled 모드에서 열림/닫힘 상태. 생략하면 Uncontrolled 모드로 동작한다.            |
-| `onOpenChange` | `(open: boolean) => void` | —       | 열림/닫힘 상태가 변경될 때 호출되는 콜백                                              |
-| `portal`       | `boolean`                 | `false` | `true`이면 `Alert.Overlay`와 `Alert.Content`를 `document.body`에 Portal로 렌더링한다. |
+| Prop           | Type                      | Default | Description                                                                                               |
+| -------------- | ------------------------- | ------- | --------------------------------------------------------------------------------------------------------- |
+| `children`     | `ReactNode`               | —       | Alert를 구성하는 하위 컴포넌트들                                                                          |
+| `isOpen`       | `boolean`                 | —       | Controlled 모드에서 열림/닫힘 상태. 생략하면 Uncontrolled 모드로 동작한다.                                |
+| `onOpenChange` | `(open: boolean) => void` | —       | 열림/닫힘 상태가 변경될 때 호출되는 콜백. `isOpen`만 단독으로 지정하는 것도 허용된다 (display-only 제어). |
+| `portal`       | `boolean`                 | `false` | `true`이면 `Alert.Overlay`와 `Alert.Content`를 `document.body`에 Portal로 렌더링한다.                     |
 
 ### `Alert.Trigger`
 
@@ -161,9 +162,14 @@ Extends `HTMLAttributes<HTMLDivElement>`. (`children` 제외)
 
 ### `Alert.Content`
 
-Extends `HTMLAttributes<HTMLDivElement>`.
+Extends `HTMLAttributes<HTMLDivElement>`. (`role`, `id`, `tabIndex`, `aria-modal`, `aria-labelledby`, `aria-describedby`, `aria-busy` 제외)
 
-추가 사용자 지정 prop 없음. `role`, `aria-modal`, `aria-labelledby`, `aria-describedby`, `data-pending`, `aria-busy`가 내부에서 자동으로 관리된다.
+- `role`, `aria-modal`: `role="alertdialog"` 및 `aria-modal="true"`로 고정
+- `id`, `aria-labelledby`, `aria-describedby`: 접근성 속성으로 컴포넌트 내부에서 자동 관리
+- `tabIndex`: 포커스 가능한 요소가 없을 때를 위해 `-1`로 고정
+- `aria-busy`: async 버튼 pending 상태에 따라 자동 관리
+
+추가 사용자 지정 prop 없음.
 
 **Structural Styles**
 
@@ -174,7 +180,9 @@ Extends `HTMLAttributes<HTMLDivElement>`.
 
 ### `Alert.Title`
 
-Extends `HTMLAttributes<HTMLHeadingElement>`.
+Extends `HTMLAttributes<HTMLHeadingElement>`. (`id` 제외)
+
+- `id`: `Alert.Content`의 `aria-labelledby`와 자동으로 연결하기 위해 내부에서 자동 관리
 
 | Prop      | Type      | Default | Description                                                 |
 | --------- | --------- | ------- | ----------------------------------------------------------- |
@@ -182,7 +190,9 @@ Extends `HTMLAttributes<HTMLHeadingElement>`.
 
 ### `Alert.Message`
 
-Extends `HTMLAttributes<HTMLParagraphElement>`.
+Extends `HTMLAttributes<HTMLParagraphElement>`. (`id` 제외)
+
+- `id`: `Alert.Content`의 `aria-describedby`와 자동으로 연결하기 위해 내부에서 자동 관리
 
 | Prop      | Type      | Default | Description                                                  |
 | --------- | --------- | ------- | ------------------------------------------------------------ |
@@ -190,9 +200,11 @@ Extends `HTMLAttributes<HTMLParagraphElement>`.
 
 ### `Alert.Button`
 
-Extends `ButtonHTMLAttributes<HTMLButtonElement>`. (`onClick` 제외 — 아래 별도 정의)
+Extends `ButtonHTMLAttributes<HTMLButtonElement>`. (`onClick`, `type` 제외)
 
+- `type`: 폼 제출 방지를 위해 `"button"`으로 고정
 - `onClick`: async 지원 및 pending 상태 관리, 자동 닫기 동작을 위해 별도로 재정의
+- `disabled`: 외부에서 전달한 값이 존중되며, 버튼 pending 중에는 항상 비활성화된다.
 
 | Prop      | Type                                                          | Default | Description                                                                                                                                                    |
 | --------- | ------------------------------------------------------------- | ------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -217,7 +229,7 @@ Extends `ButtonHTMLAttributes<HTMLButtonElement>`. (`onClick` 제외 — 아래 
 
 - `onOpenChange`를 사용하는 Controlled 모드에서는 `isOpen`을 `onOpenChange` 콜백 외부에서 직접 변경해서는 안 된다. Alert 내부의 pending 상태 등이 `isOpen` 변화에 맞춰 정리되지 않아 예기치 않은 동작이 발생할 수 있다.
 - Controlled 모드에서 `Alert.Button`의 async `onClick`이 처리 중일 때 외부에서 `isOpen`을 `false`로 변경하면, 다음 번에 Alert가 열릴 때 모든 버튼이 비활성화된 채로 시작될 수 있다. `onOpenChange` 콜백을 통해 닫는 정상적인 흐름에서는 발생하지 않는다.
-- `Alert.Button`의 `onClick`이 동기 함수이거나 생략된 경우, pending 상태에 진입하지 않고 즉시 닫힌다. pending 상태(`data-pending`, `aria-busy`, 버튼 비활성화)는 `onClick`이 `Promise`를 반환할 때만 활성화된다.
+- `Alert.Button`의 `onClick`이 동기 함수이거나 생략된 경우, pending 상태에 진입하지 않고 즉시 닫힌다. pending 상태(`aria-busy`, 버튼 비활성화)는 `onClick`이 `Promise`를 반환할 때만 활성화된다.
 
 ---
 
