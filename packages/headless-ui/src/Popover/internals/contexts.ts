@@ -9,6 +9,8 @@ type PopoverContextValue = {
   isOpen: boolean;
   showPopover: () => void;
   hidePopover: () => void;
+  isPending: boolean;
+  setPending: (pending: boolean) => void;
   isPortalMode: boolean;
   floatingStyles: { container: CSSProperties; arrow: CSSProperties };
   contentId: string;

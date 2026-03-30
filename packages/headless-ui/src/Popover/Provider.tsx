@@ -35,6 +35,7 @@ export function Provider({
   const floatingRef = useRef<HTMLDialogElement | null>(null);
   const contentId = useId();
   const [titleId, setTitleId] = useState<string | undefined>(undefined);
+  const [isPending, setPending] = useState(false);
 
   useClickOutside(floatingRef, hidePopover, isOpen, triggerRef);
   useKeyboardEvent("Escape", hidePopover, isOpen);
@@ -53,6 +54,8 @@ export function Provider({
       isOpen,
       showPopover: () => showPopover(),
       hidePopover: () => hidePopover(),
+      isPending,
+      setPending,
       isPortalMode: portal,
       floatingStyles,
       contentId,
@@ -65,6 +68,7 @@ export function Provider({
       isOpen,
       showPopover,
       hidePopover,
+      isPending,
       portal,
       floatingStyles,
       contentId,

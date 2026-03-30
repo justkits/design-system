@@ -19,6 +19,7 @@ export function PopoverContent({
   const {
     isOpen,
     isPortalMode,
+    isPending,
     contentId,
     titleId,
     floatingStyles,
@@ -41,6 +42,7 @@ export function PopoverContent({
           {...rest}
           id={contentId}
           aria-labelledby={titleId}
+          aria-busy={isPending}
           open
           tabIndex={-1}
           ref={floatingRef as RefObject<HTMLDialogElement>}
