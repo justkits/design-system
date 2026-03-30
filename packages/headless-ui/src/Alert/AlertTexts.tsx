@@ -1,11 +1,11 @@
-import { type HTMLAttributes, useContext } from "react";
+import { type HTMLAttributes, useContext, useId, useLayoutEffect } from "react";
 
 import { AsChild } from "@/core/asChild";
 import { ContentContext, useAlert } from "./internals/contexts";
 
 type AlertTitleProps = {
   asChild?: boolean;
-} & HTMLAttributes<HTMLHeadingElement>;
+} & Omit<HTMLAttributes<HTMLHeadingElement>, "id">;
 
 export function AlertTitle({
   children,
@@ -14,9 +14,15 @@ export function AlertTitle({
   asChild = false,
   ...rest
 }: Readonly<AlertTitleProps>) {
-  const { titleId } = useAlert();
+  const { setTitleId } = useAlert();
+  const titleId = useId();
 
   const isInsideContent = useContext(ContentContext);
+
+  useLayoutEffect(() => {
+    setTitleId(titleId);
+    return () => setTitleId(undefined);
+  }, [titleId, setTitleId]);
 
   if (!isInsideContent) {
     throw new Error("Alert.Title must be used within Alert.Content");
@@ -24,14 +30,14 @@ export function AlertTitle({
 
   if (asChild) {
     return (
-      <AsChild id={titleId} className={className} style={style} {...rest}>
+      <AsChild className={className} style={style} {...rest} id={titleId}>
         {children}
       </AsChild>
     );
   }
 
   return (
-    <h2 id={titleId} className={className} style={style} {...rest}>
+    <h2 className={className} style={style} {...rest} id={titleId}>
       {children}
     </h2>
   );
@@ -39,7 +45,7 @@ export function AlertTitle({
 
 type AlertMessageProps = {
   asChild?: boolean;
-} & HTMLAttributes<HTMLParagraphElement>;
+} & Omit<HTMLAttributes<HTMLParagraphElement>, "id">;
 
 export function AlertMessage({
   children,
@@ -48,9 +54,15 @@ export function AlertMessage({
   asChild = false,
   ...rest
 }: Readonly<AlertMessageProps>) {
-  const { descriptionId } = useAlert();
+  const { setDescriptionId } = useAlert();
+  const descriptionId = useId();
 
   const isInsideContent = useContext(ContentContext);
+
+  useLayoutEffect(() => {
+    setDescriptionId(descriptionId);
+    return () => setDescriptionId(undefined);
+  }, [descriptionId, setDescriptionId]);
 
   if (!isInsideContent) {
     throw new Error("Alert.Message must be used within Alert.Content");
@@ -58,14 +70,14 @@ export function AlertMessage({
 
   if (asChild) {
     return (
-      <AsChild id={descriptionId} className={className} style={style} {...rest}>
+      <AsChild className={className} style={style} {...rest} id={descriptionId}>
         {children}
       </AsChild>
     );
   }
 
   return (
-    <p id={descriptionId} className={className} style={style} {...rest}>
+    <p className={className} style={style} {...rest} id={descriptionId}>
       {children}
     </p>
   );
