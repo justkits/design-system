@@ -237,6 +237,7 @@ Extends `HTMLAttributes<HTMLDivElement>`. (`aria-hidden` 제외) `aria-hidden="t
 
 - **단방향 flip만 지원한다**: 공간이 부족할 때 반대 방향으로 한 번만 flip되며, flip된 방향에도 공간이 충분한지는 검증하지 않는다. 뷰포트가 매우 작거나 팝오버가 클 경우 flip 후에도 팝오버가 뷰포트를 벗어날 수 있다.
 - **`offset`은 두 간격을 동시에 제어한다**: `offset` prop은 Trigger와 팝오버 사이의 간격, 그리고 팝오버와 뷰포트 가장자리 사이의 최소 여백을 동일한 값으로 연동한다. 두 값을 독립적으로 설정할 수 없다.
+- **`aria-label` 폴백이 영어로 고정되어 있다**: `Popover.Title`을 사용하지 않으면 `Popover.Content`에 `aria-label="Popover Content"`가 자동으로 설정된다. 이 값은 현재 영어로 고정되어 있어 한국어 등 다른 언어 환경에서 스크린 리더가 영어로 읽을 수 있다. `Popover.Title`을 사용하면 이 폴백이 적용되지 않는다.
 
 ## Future Considerations
 
