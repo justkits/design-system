@@ -155,16 +155,15 @@ Extends `ButtonHTMLAttributes<HTMLButtonElement>`. (`type`, `aria-controls`, `ar
 
 ### `Popover.Content`
 
-Extends `DialogHTMLAttributes<HTMLDialogElement>`. (`role`, `id`, `aria-labelledby`, `open`, `tabIndex` 제외)
+Extends `DialogHTMLAttributes<HTMLDialogElement>`. (`role`, `id`, `aria-label`, `aria-labelledby`, `open`, `tabIndex` 제외)
 
 - `role`: `<dialog>` 요소를 사용하여 암묵적으로 `role="dialog"`로 고정
 - `id`, `aria-labelledby`: 접근성 속성으로 컴포넌트 내부에서 자동 관리
+- `aria-label`: `Popover.Title`이 있으면 설정하지 않고, 없으면 `"Popover Content"`로 자동 설정된다.
 - `open`: 팝오버가 열릴 때 자동으로 적용
 - `tabIndex`: 포커스 가능한 요소가 없을 때를 위해 `-1`로 고정
 
-| Prop         | Type     | Default             | Description                                                                                                       |
-| ------------ | -------- | ------------------- | ----------------------------------------------------------------------------------------------------------------- |
-| `aria-label` | `string` | `"Popover Content"` | 팝오버의 접근 가능한 이름. `Popover.Title`이 있으면 `aria-labelledby`로 자동 연결되지만, 두 속성은 함께 유지된다. |
+추가 사용자 지정 prop 없음.
 
 **Structural Styles**
 
