@@ -26,8 +26,10 @@ export function Provider({
   } = useOpenState(controlledOpen, onOpenChange, false);
   const [isPending, setPending] = useState(false);
 
-  const titleId = useId();
-  const descriptionId = useId();
+  const [titleId, setTitleId] = useState<string | undefined>(undefined);
+  const [descriptionId, setDescriptionId] = useState<string | undefined>(
+    undefined,
+  );
   const contentId = useId();
 
   const wrapperRef = useRef<HTMLDivElement | null>(null);
@@ -43,7 +45,9 @@ export function Provider({
       showAlert,
       closeAlert,
       titleId,
+      setTitleId,
       descriptionId,
+      setDescriptionId,
       contentId,
       isPending,
       setPending,
@@ -56,7 +60,9 @@ export function Provider({
       showAlert,
       closeAlert,
       titleId,
+      setTitleId,
       descriptionId,
+      setDescriptionId,
       contentId,
       isPending,
       portal,

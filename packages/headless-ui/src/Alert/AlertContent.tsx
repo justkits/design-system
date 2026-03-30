@@ -4,12 +4,23 @@ import { Portal } from "@/core/portal";
 import { ContentContext, useAlert } from "./internals/contexts";
 import { styles } from "./internals/styles";
 
+type AlertContentProps = Omit<
+  HTMLAttributes<HTMLDivElement>,
+  | "role"
+  | "id"
+  | "tabIndex"
+  | "aria-modal"
+  | "aria-labelledby"
+  | "aria-describedby"
+  | "aria-busy"
+>;
+
 export function AlertContent({
   children,
   className,
   style,
   ...rest
-}: Readonly<HTMLAttributes<HTMLDivElement>>) {
+}: Readonly<AlertContentProps>) {
   const {
     isOpen,
     titleId,
@@ -26,18 +37,17 @@ export function AlertContent({
     <Portal isPortalMode={isPortalMode}>
       <ContentContext.Provider value={true}>
         <div
-          ref={wrapperRef}
-          id={contentId}
           className={className}
           style={{ ...styles.alert, ...style }}
+          {...rest}
+          ref={wrapperRef}
+          id={contentId}
           role="alertdialog"
           tabIndex={-1}
           aria-modal="true"
           aria-labelledby={titleId}
           aria-describedby={descriptionId}
-          data-pending={isPending ? "true" : undefined}
-          aria-busy={isPending ? "true" : undefined}
-          {...rest}
+          aria-busy={isPending}
         >
           {children}
         </div>

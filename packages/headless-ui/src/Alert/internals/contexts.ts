@@ -11,8 +11,10 @@ type AlertStateType = {
   isPending: boolean;
   setPending: (pending: boolean) => void;
   // ARIA 연결을 위한 id
-  titleId: string;
-  descriptionId: string;
+  titleId: string | undefined;
+  setTitleId: (id: string | undefined) => void;
+  descriptionId: string | undefined;
+  setDescriptionId: (id: string | undefined) => void;
   contentId: string;
   // 포커스 트랩, 외부 클릭 감지 등 기능을 위한 DOM 참조 (포커스 트랩, 외부 클릭 감지 등)
   wrapperRef: RefObject<HTMLDivElement | null>;
