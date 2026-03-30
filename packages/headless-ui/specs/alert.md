@@ -29,8 +29,8 @@
 
 - ID
   - [x] `Alert.Content`의 ID와 `Alert.Trigger`의 `aria-controls`가 자동으로 연결된다.
-  - [x] `Alert.Title`의 ID와 `Alert.Content`의 `aria-labelledby`가 자동으로 연결된다.
-  - [x] `Alert.Message`의 ID와 `Alert.Content`의 `aria-describedby`가 자동으로 연결된다.
+  - [x] `Alert.Title`의 ID와 `Alert.Content`의 `aria-labelledby`가 자동으로 연결된다. `Alert.Title`이 없으면 `aria-labelledby`는 설정하지 않는다.
+  - [x] `Alert.Message`의 ID와 `Alert.Content`의 `aria-describedby`가 자동으로 연결된다. `Alert.Message`가 없으면 `aria-describedby`는 설정하지 않는다.
 - Attributes
   - [x] `Alert.Trigger`가 `aria-haspopup=dialog`를 가진다.
   - [x] `Alert.Content`가 `role="alertdialog"`와 `aria-modal="true"`를 가진다.
@@ -55,7 +55,7 @@
 - Others
   - [x] dialog가 열려있는 동안 배경 페이지의 스크롤이 잠기고, 닫히면 복원된다.
   - Async Button Actions (`Alert.Button`의 `onClick`이 Promise를 반환)
-    - [x] 클릭 시 dialog가 닫히지 않고 pending 상태가 되며, `Alert.Content`에 `data-pending="true"`와 `aria-busy="true"`가 설정된다. 또한, 모든 `Alert.Button`이 비활성화된다.
+    - [x] 클릭 시 dialog가 닫히지 않고 pending 상태가 되며, `Alert.Content`에 `aria-busy="true"`가 설정된다. 또한, 모든 `Alert.Button`이 비활성화된다.
     - [x] resolve되면 dialog가 자동으로 닫힌다.
     - [x] reject되면 dialog가 닫히지 않는다.
 
