@@ -3,6 +3,7 @@
 호버, 키보드 포커스, 또는 길게 누르기(Long Press)로 트리거되는 Tooltip 컴포넌트. 트리거 요소에 대한 보조 설명을 제공하며, 포커스를 빼앗지 않고 Trigger 위에 유지한다. 뷰포트 경계를 고려한 자동 위치 조정을 기본으로 제공한다.
 
 - **WAI-ARIA Reference**: [Tooltip](https://www.w3.org/WAI/ARIA/apg/patterns/tooltip/)
+- **MDN Reference**: [aria-haspopup](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Reference/Attributes/aria-haspopup)
 
 ## Anatomy
 
@@ -107,7 +108,7 @@ export function GuidedTour() {
 | ------------------- | ---------------------------------------- | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `children`          | `ReactNode`                              | —          | Tooltip을 구성하는 하위 컴포넌트들                                                                                                                                  |
 | `isOpen`            | `boolean`                                | —          | Controlled 모드에서 열림/닫힘 상태. 생략하면 Uncontrolled 모드로 동작한다.                                                                                          |
-| `onOpenChange`      | `(open: boolean) => void`                | —          | 열림/닫힘 상태가 변경될 때 호출되는 콜백                                                                                                                            |
+| `onOpenChange`      | `(open: boolean) => void`                | —          | 열림/닫힘 상태가 변경될 때 호출되는 콜백. `isOpen`만 단독으로 지정하는 것도 허용된다 (display-only 제어).                                                           |
 | `portal`            | `boolean`                                | `false`    | `true`이면 `Tooltip.Content`를 `document.body`에 Portal로 렌더링한다.                                                                                               |
 | `position`          | `"top" \| "bottom" \| "left" \| "right"` | `"bottom"` | 툴팁이 Trigger 기준으로 표시될 방향. 공간이 부족하면 자동으로 flip/shift된다.                                                                                       |
 | `offset`            | `number`                                 | `16`       | Trigger와 툴팁 사이의 간격, 그리고 툴팁과 뷰포트 가장자리 사이의 최소 간격을 동시에 제어한다 (픽셀 단위). 두 간격은 같은 값으로 연동되어 독립적으로 설정할 수 없다. |
@@ -118,10 +119,11 @@ export function GuidedTour() {
 
 ### `Tooltip.Trigger`
 
-Extends `ButtonHTMLAttributes<HTMLButtonElement>`. (`type`, `aria-describedby`, `onMouseEnter`, `onMouseLeave`, `onFocus`, `onBlur`, `onTouchStart`, `onTouchEnd`, `onTouchMove`, `onTouchCancel` 제외)
+Extends `ButtonHTMLAttributes<HTMLButtonElement>`. (`type`, `aria-describedby`, `disabled`, `onMouseEnter`, `onMouseLeave`, `onFocus`, `onBlur`, `onTouchStart`, `onTouchEnd`, `onTouchMove`, `onTouchCancel` 제외)
 
 - `type`: 기본 버튼은 항상 `type="button"`으로 고정된다. `asChild` 사용 시 자식 엘리먼트의 타입을 직접 지정한다.
 - `aria-describedby`: `Tooltip.Content`의 ID와 연결하기 위해 내부에서 자동 관리
+- `disabled`: `Tooltip` Provider의 `disabled` prop에 의해 내부에서 관리
 - 마우스/포커스/터치 이벤트 핸들러: 툴팁 열기/닫기 동작으로 내부에서 처리
 
 | Prop      | Type      | Default | Description                                        |
@@ -153,7 +155,7 @@ Extends `HTMLAttributes<HTMLParagraphElement>`.
 
 ### `Tooltip.Arrow`
 
-Extends `HTMLAttributes<HTMLDivElement>`. `aria-hidden="true"`가 자동으로 설정된다.
+Extends `HTMLAttributes<HTMLDivElement>`. (`aria-hidden` 제외) `aria-hidden="true"`가 자동으로 설정된다.
 
 추가 사용자 지정 prop 없음.
 
