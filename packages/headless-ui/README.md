@@ -82,3 +82,4 @@ import { Alert } from "@justkits/headless-ui";
 - **서브패스 임포트 지원** - 현재는 `import { Alert } from "@justkits/headless-ui";` 처럼 배럴 임포트만 지원하지만, 번들 사이즈를 줄이기 위해 `import { Alert } from "@justkits/headless-ui/alert";`처럼 서브패스 임포트 지원을 고려하고 있다.
 - **data-state 속성** - `data-state="open"|"closed"`를 제공하여 CSS 트랜지션 및 애니메이션에 활용할 수 있도록 지원.
   - 현재는 `@justkits/motion`의 `useAnimatedExit()` 훅을 사용할 것을 권장한다.
+- **data-\* 속성** - 현재는 `data-state` 외에도 `dataset`을 사용하고 있지 않다. 추후 사용을 고려한다.
