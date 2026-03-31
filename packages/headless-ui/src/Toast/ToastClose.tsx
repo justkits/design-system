@@ -6,7 +6,7 @@ import { ContentContext, useToast } from "./internals/contexts";
 type ToastCloseProps = {
   asChild?: boolean;
   onClick?: (e: MouseEvent<HTMLButtonElement>) => void | Promise<void>;
-} & Omit<ButtonHTMLAttributes<HTMLButtonElement>, "onClick">;
+} & Omit<ButtonHTMLAttributes<HTMLButtonElement>, "onClick" | "type">;
 
 export function ToastClose({
   className,
