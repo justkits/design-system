@@ -1,9 +1,12 @@
-import { fireEvent, render } from "@testing-library/react";
+import { act, fireEvent, render } from "@testing-library/react";
 
 import { Toast } from "@/Toast";
+import { setupTimer } from "../_setup";
 import { TestComponent } from "./_setup";
 
 describe("Toast - state", () => {
+  setupTimer();
+
   it("supports uncontrolled mode", () => {
     const { getByTestId, queryByTestId } = render(<TestComponent />);
 
@@ -43,6 +46,19 @@ describe("Toast - state", () => {
     expect(getByTestId("content")).toBeTruthy();
 
     fireEvent.click(getByTestId("close-button"));
+    expect(onOpenChange).toHaveBeenCalledWith(false);
+
+    rerender(
+      <Toast isOpen={true} onOpenChange={onOpenChange} duration={3000}>
+        <Toast.Trigger data-testid="trigger">Trigger</Toast.Trigger>
+        <Toast.Content data-testid="content">
+          <Toast.Close data-testid="close-button">Close</Toast.Close>
+        </Toast.Content>
+      </Toast>,
+    );
+    onOpenChange.mockClear();
+
+    act(() => vi.advanceTimersByTime(3000));
     expect(onOpenChange).toHaveBeenCalledWith(false);
   });
 });

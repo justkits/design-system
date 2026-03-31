@@ -73,6 +73,35 @@ describe("Toast - interactions", () => {
       // 타이머가 재개되어 토스트가 닫혀야 한다.
       expect(queryByTestId("toast-content")).toBeNull();
     });
+
+    it("does not resume the timer even if mouse leaves, if the keyboard focus is still inside Toast.Content`", () => {
+      const { getByTestId } = render(<TestComponent duration={3000} />);
+
+      act(() => fireEvent.click(getByTestId("toast-trigger")));
+
+      expect(getByTestId("toast-content")).toBeTruthy();
+
+      // 마우스 엔터로 타이머 일시정지
+      act(() => {
+        fireEvent.mouseEnter(getByTestId("toast-content"));
+        vi.advanceTimersByTime(3000);
+      });
+
+      // 타이머가 일시정지되어 있어야 한다.
+      expect(getByTestId("toast-content")).toBeTruthy();
+
+      // 버튼에 포커스
+      act(() => getByTestId("toast-close").focus());
+
+      // 마우스 리브로 타이머 재개 시도
+      act(() => {
+        fireEvent.mouseLeave(getByTestId("toast-content"));
+        vi.advanceTimersByTime(3000);
+      });
+
+      // 키보드 포커스가 여전히 Toast.Content 내부에 있으므로, 타이머가 재개되지 않아야 한다.
+      expect(getByTestId("toast-content")).toBeTruthy();
+    });
   });
 
   describe("Keyboard", () => {
@@ -120,6 +149,53 @@ describe("Toast - interactions", () => {
 
       // 토스트가 열릴 때 자동으로 포커스가 이동하면 안 된다.
       expect(document.activeElement).toBe(document.body);
+    });
+
+    it("pauses the auto-dismiss timer while focus is inside Toast.Content and resumes when it leaves", () => {
+      const { getByTestId, queryByTestId } = render(
+        <TestComponent duration={3000} />,
+      );
+
+      act(() => fireEvent.click(getByTestId("toast-trigger")));
+      expect(getByTestId("toast-content")).toBeTruthy();
+
+      // 버튼에 포커스
+      act(() => getByTestId("toast-close").focus());
+
+      // 타이머가 일시정지되어 있어야 한다.
+      act(() => vi.advanceTimersByTime(3000));
+      expect(getByTestId("toast-content")).toBeTruthy();
+
+      // 포커스 이동
+      act(() => simulateTab());
+
+      // 타이머가 재개되어 토스트가 닫혀야 한다.
+      act(() => vi.advanceTimersByTime(3000));
+      expect(queryByTestId("toast-content")).toBeNull();
+    });
+
+    it("does not resume the timer even if focus leaves, if the mouse is still inside Toast.Content`", () => {
+      const { getByTestId } = render(<TestComponent duration={3000} />);
+
+      act(() => fireEvent.click(getByTestId("toast-trigger")));
+      expect(getByTestId("toast-content")).toBeTruthy();
+
+      // 버튼에 포커스
+      act(() => getByTestId("toast-close").focus());
+
+      // 타이머가 일시정지되어 있어야 한다.
+      act(() => vi.advanceTimersByTime(3000));
+      expect(getByTestId("toast-content")).toBeTruthy();
+
+      // 마우스 엔터로 타이머 일시정지
+      act(() => fireEvent.mouseEnter(getByTestId("toast-content")));
+
+      // 포커스 이동 시도
+      act(() => simulateTab());
+
+      // 마우스가 여전히 Toast.Content 내부에 있으므로, 타이머가 재개되지 않아야 한다.
+      act(() => vi.advanceTimersByTime(3000));
+      expect(getByTestId("toast-content")).toBeTruthy();
     });
   });
 
