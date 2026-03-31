@@ -1,5 +1,11 @@
 # @justkits/feedback
 
+## 1.0.1
+
+### Patch Changes
+
+- [#58](https://github.com/justkits/design-system/pull/58) [`a2ca0aa`](https://github.com/justkits/design-system/commit/a2ca0aad6bfbe1ef0312453904df6f5f6ef88ea1) Thanks [@justwon0307](https://github.com/justwon0307)! - Update docs
+
 ## 1.0.0
 
 ### Major Changes
