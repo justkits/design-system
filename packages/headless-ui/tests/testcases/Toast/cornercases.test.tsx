@@ -5,6 +5,68 @@ import { swipe, TestComponent } from "./_setup";
 
 describe("Toast - corner cases", () => {
   describe("Async Close Actions", () => {
+    describe("timer behavior", () => {
+      setupTimer();
+
+      it("pauses the auto-dismiss timer while async close is pending", async () => {
+        let resolvePromise!: () => void;
+        const pendingPromise = new Promise<void>((resolve) => {
+          resolvePromise = resolve;
+        });
+        const onClose = vi.fn().mockReturnValue(pendingPromise);
+        const { getByTestId, queryByTestId } = render(
+          <TestComponent onClose={onClose} duration={3000} />,
+        );
+
+        act(() => fireEvent.click(getByTestId("toast-trigger")));
+        expect(getByTestId("toast-content")).toBeTruthy();
+
+        // close 클릭 → pauseTimer가 동기적으로 호출된다.
+        act(() => fireEvent.click(getByTestId("toast-close")));
+
+        // async close pending 중에 duration이 경과해도 타이머가 일시정지되어 닫히면 안 된다.
+        act(() => vi.advanceTimersByTime(3000));
+        expect(queryByTestId("toast-content")).toBeTruthy();
+
+        // resolve 후 toast가 닫혀야 한다.
+        await act(async () => {
+          resolvePromise();
+        });
+        expect(queryByTestId("toast-content")).toBeNull();
+      });
+
+      it("resumes the auto-dismiss timer with remaining time after async close rejects", async () => {
+        const onClose = vi
+          .fn()
+          .mockRejectedValue(new Error("onClose promise rejected"));
+        const { getByTestId, queryByTestId } = render(
+          <TestComponent onClose={onClose} duration={3000} />,
+        );
+
+        act(() => fireEvent.click(getByTestId("toast-trigger")));
+        expect(getByTestId("toast-content")).toBeTruthy();
+
+        // 1000ms 경과 (남은 시간: 2000ms)
+        act(() => vi.advanceTimersByTime(1000));
+
+        // async close 클릭, reject 처리까지 완료 → resumeTimer가 호출된다.
+        await act(async () => {
+          fireEvent.click(getByTestId("toast-close"));
+        });
+
+        // reject 후 toast가 열려 있어야 한다.
+        expect(queryByTestId("toast-content")).toBeTruthy();
+
+        // 남은 시간(2000ms)보다 1ms 적게 경과 → 아직 닫히면 안 된다.
+        act(() => vi.advanceTimersByTime(1999));
+        expect(queryByTestId("toast-content")).toBeTruthy();
+
+        // 나머지 1ms 경과 → 총 2000ms 경과, 타이머가 재개되어 닫혀야 한다.
+        act(() => vi.advanceTimersByTime(1));
+        expect(queryByTestId("toast-content")).toBeNull();
+      });
+    });
+
     it("stays open while pending and sets correct properties and closes on resolve", async () => {
       let resolvePromise!: () => void;
       const onClose = () =>

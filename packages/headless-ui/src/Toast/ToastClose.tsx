@@ -17,7 +17,8 @@ export function ToastClose({
   disabled,
   ...rest
 }: Readonly<ToastCloseProps>) {
-  const { dismissToast, isPending, setPending } = useToast();
+  const { dismissToast, isPending, setPending, pauseTimer, resumeTimer } =
+    useToast();
 
   const isInsideContent = useContext(ContentContext);
 
@@ -33,12 +34,14 @@ export function ToastClose({
     }
 
     setPending(true);
+    pauseTimer();
 
     try {
       await result;
       dismissToast();
     } catch {
       // Promise가 거부되면, Toast는 닫히지 않고 pending 상태도 해제되어야 한다.
+      resumeTimer();
     } finally {
       setPending(false);
     }
