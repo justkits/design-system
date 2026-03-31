@@ -34,21 +34,21 @@ export function AlertButton({
     return () => setPending(false);
   }, [setPending]);
 
-  const handleClick = (e: MouseEvent<HTMLButtonElement>) => {
+  const handleClick = async (e: MouseEvent<HTMLButtonElement>) => {
     const result = onClick?.(e);
     if (!(result instanceof Promise)) {
       closeAlert();
       return;
     }
     setPending(true);
-    result
-      .then(() => {
-        setPending(false);
-        closeAlert();
-      })
-      .catch(() => {
-        setPending(false);
-      });
+    try {
+      await result;
+      closeAlert();
+    } catch {
+      // Promise가 거부되면, Alert는 닫히지 않고 pending 상태도 해제되어야 한다.
+    } finally {
+      setPending(false);
+    }
   };
 
   if (asChild) {
