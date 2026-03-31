@@ -2,8 +2,9 @@
 
 사용자에게 비모달 방식으로 간결한 알림을 전달하는 Toast 컴포넌트. 일정 시간 후 자동으로 사라지며, 마우스 호버·포커스 시 타이머가 일시정지된다. 스와이프로 직접 닫을 수 있으며, 포커스를 빼앗지 않고 배경 조작을 막지 않는다.
 
-- **WAI-ARIA Reference**: [Status](https://www.w3.org/WAI/ARIA/apg/patterns/alert/)
-- **MDN References**: [aria-live](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Reference/Attributes/aria-live), [aria-atomic](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Reference/Attributes/aria-atomic)
+- **WAI-ARIA Reference**: [status role (WAI-ARIA 1.2)](https://www.w3.org/TR/wai-aria-1.2/#status), [ARIA22: Using role=status to present status messages](https://www.w3.org/WAI/WCAG21/Techniques/aria/ARIA22)
+- **WCAG Reference**: [4.1.3 Status Messages](https://www.w3.org/WAI/WCAG22/Understanding/status-messages.html), [2.2.1 Timing Adjustable](https://www.w3.org/WAI/WCAG22/Understanding/timing-adjustable.html)
+- **MDN References**: [ARIA: status role](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Reference/Roles/status_role), [ARIA live regions](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Guides/Live_regions), [aria-live](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Reference/Attributes/aria-live), [aria-atomic](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Reference/Attributes/aria-atomic)
 
 > 명령형으로 어디서든 알림을 띄우는 기능을 지원하는 `@justkits/feedback` 패키지와 함께 사용할 수 있다. (구체적인 사용 예시 등 자세한 내용은 [`@justkits/feedback`의 README 파일](https://github.com/justkits/design-system/blob/main/packages/feedback/README.md)을 참고)
 
@@ -80,10 +81,10 @@ export function UploadNotification() {
 > `@justkits/feedback` 패키지와 함께 사용하기 가장 적합한 방식이다.
 
 ```tsx
-import type { ToastComponentProps } from "@justkits/feedback";
+import type { ToastItemProps } from "@justkits/feedback";
 import { Toast } from "@justkits/headless-ui";
 
-export function ToastComponent({ toast }: ToastComponentProps) {
+export function ToastComponent({ toast }: ToastItemProps) {
   return (
     <Toast isOpen>
       {" "}
@@ -198,6 +199,8 @@ Extends `HTMLAttributes<HTMLDivElement>`. (`role`, `aria-live`, `aria-atomic`, `
 - `role`, `aria-live`, `aria-atomic`: `role="status"`, `aria-live="polite"`, `aria-atomic="true"`로 고정
 - 마우스/포커스 이벤트 핸들러: 타이머 일시정지/재개 동작으로 내부에서 처리
 
+> **`role`은 status로 고정**: `Toast`는 `role="status"`(polite live region)로 고정 설계되어, 사용자 흐름을 방해하지 않는 비긴급 알림 전용으로 사용한다. 즉각적인 주의가 필요한 긴급 메시지(`role="alert"`, assertive)가 필요하다면 `<Alert />` 컴포넌트를 사용한다.
+
 추가 사용자 지정 prop 없음.
 
 **Structural Styles**
@@ -234,7 +237,7 @@ Extends `ButtonHTMLAttributes<HTMLButtonElement>`. (`onClick`, `type` 제외)
 - **Swipe to Dismiss** - 지정한 방향으로 `swipeThreshold` 이상 스와이프하면 토스트가 닫힌다. 터치 디바이스를 지원한다.
 - **Keyboard** - 포커스가 `Toast.Content` 내부에 있을 때 `Escape` 키로 닫을 수 있다.
 - **No Focus Trap** - `Tab` 키가 정상적으로 다음 포커스 가능한 요소로 이동한다. 토스트가 열려도 포커스가 자동으로 이동하지 않는다.
-- **Async Actions** - `Toast.Close`의 `onClick`이 async이면 Promise resolve 전까지 토스트를 닫지 않으며, pending 중 버튼이 비활성화된다.
+- **Async Actions** - `Toast.Close`의 `onClick`이 async이면 Promise resolve 전까지 토스트를 닫지 않으며, pending 중 버튼이 비활성화된다. async close가 시작되면 자동 닫힘 타이머가 일시정지되고, reject되면 남은 시간부터 타이머가 재개된다.
 - **Controlled & Uncontrolled** - 두 가지 상태 관리 방식을 모두 지원한다.
 - **asChild** - `Toast.Trigger`, `Toast.Message`, `Toast.Close`에서 지원한다.
 
@@ -261,9 +264,12 @@ Extends `ButtonHTMLAttributes<HTMLButtonElement>`. (`onClick`, `type` 제외)
 
 - `Toast.Content` 안에서 사용하는 인터랙티브 요소(버튼, 링크 등)는 키보드로 접근할 수 있으나, 포커스가 자동으로 이동하지 않으므로 사용자가 직접 Tab으로 이동해야 한다.
 
+- **WCAG 2.2.1 Timing Adjustable**: 자동 닫힘 기능이 있는 Toast는 [WCAG 2.2.1 Timing Adjustable](https://www.w3.org/WAI/WCAG22/Understanding/timing-adjustable.html) 관련 접근성 이슈를 야기할 수 있다. `Toast`는 이를 위해 `duration="infinite"` 옵션과 마우스 호버·포커스 시 타이머 일시정지 기능을 제공한다. 단, 이러한 제어 수단을 사용자에게 실제로 노출할 책임은 `Toast`를 사용하는 애플리케이션에 있다.
+
 ## Known Issues
 
 - `onOpenChange`를 사용하는 Controlled 모드에서는 `isOpen`을 `onOpenChange` 콜백 외부에서 직접 변경해서는 안 된다. `Toast.Close`의 pending 상태 등이 `isOpen` 변화에 맞춰 정리되지 않아 예기치 않은 동작이 발생할 수 있다.
+- Controlled 모드에서 `Toast.Close`의 async `onClick`이 처리 중일 때 외부에서 `isOpen`을 `false`로 변경하면, 다음 번에 Toast가 열릴 때 버튼이 비활성화된 채로 시작될 수 있다. `onOpenChange` 콜백을 통해 닫는 정상적인 흐름에서는 발생하지 않는다.
 
 ---
 
