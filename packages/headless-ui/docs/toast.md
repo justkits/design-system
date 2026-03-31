@@ -76,7 +76,7 @@ export function UploadNotification() {
 
 ### 3. Controlled Mode (Display Only)
 
-`onOpenChange`를 넘기지 않고 외부에서 컨트롤하며, `Toast`는 디스플레이만 담당하도록 역할을 분리하는 방식이다.
+외부에서 열림/닫힘을 컨트롤하며, `Toast`는 디스플레이와 타이머 관리만 담당하도록 역할을 분리하는 방식이다. `Trigger` 없이 `isOpen={true}`로 고정하고, `onOpenChange`로 dismiss를 연결한다.
 
 > `@justkits/feedback` 패키지와 함께 사용하기 가장 적합한 방식이다.
 
@@ -86,12 +86,10 @@ import { Toast } from "@justkits/headless-ui";
 
 export function ToastComponent({ toast }: ToastItemProps) {
   return (
-    <Toast isOpen>
-      {" "}
-      {/* isOpen은 true로 고정 */}
+    <Toast isOpen={true} onOpenChange={toast.dismiss} duration={toast.duration}>
       <Toast.Content>
         <Toast.Message>{toast.message}</Toast.Message>
-        <Toast.Close onClick={toast.onClose}>닫기</Toast.Close>
+        <Toast.Close>닫기</Toast.Close>
       </Toast.Content>
     </Toast>
   );
@@ -263,6 +261,17 @@ Extends `ButtonHTMLAttributes<HTMLButtonElement>`. (`onClick`, `type` 제외)
 - `Toast.Trigger`는 `Toast.Content` 밖에서 사용해야 한다. `Toast.Content` 안에 배치하면 dev mode에서 콘솔 경고가 출력된다.
 
 - `Toast.Content` 안에서 사용하는 인터랙티브 요소(버튼, 링크 등)는 키보드로 접근할 수 있으나, 포커스가 자동으로 이동하지 않으므로 사용자가 직접 Tab으로 이동해야 한다.
+
+- **`swipeDirection`에 배열 리터럴을 인라인으로 넘기면 매 렌더마다 새 참조가 생성되어 불필요한 리렌더가 발생할 수 있다.** 컴포넌트 외부에 상수로 선언하거나 `useMemo`로 참조를 안정화하는 것을 권장한다.
+
+  ```tsx
+  const swipeDirection = useMemo(
+    () => ["left", "right"] as SwipeDirection[],
+    [],
+  );
+
+  <Toast swipeDirection={swipeDirection}>...</Toast>;
+  ```
 
 - **WCAG 2.2.1 Timing Adjustable**: 자동 닫힘 기능이 있는 Toast는 [WCAG 2.2.1 Timing Adjustable](https://www.w3.org/WAI/WCAG22/Understanding/timing-adjustable.html) 관련 접근성 이슈를 야기할 수 있다. `Toast`는 이를 위해 `duration="infinite"` 옵션과 마우스 호버·포커스 시 타이머 일시정지 기능을 제공한다. 단, 이러한 제어 수단을 사용자에게 실제로 노출할 책임은 `Toast`를 사용하는 애플리케이션에 있다.
 
