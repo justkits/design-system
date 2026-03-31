@@ -1,7 +1,7 @@
 import { act, fireEvent, render } from "@testing-library/react";
 
-import { swipe, TestComponent } from "./_setup";
 import { setupTimer } from "../_setup";
+import { swipe, TestComponent } from "./_setup";
 
 describe("Toast - options", () => {
   setupTimer();
