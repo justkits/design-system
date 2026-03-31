@@ -82,7 +82,7 @@ export function Page() {
 /// React 외 예시
 import { toast } from "@justkits/feedback";
 
-export function updateData() {
+export async function updateData() {
   try {
     await updateAPI();
 
@@ -299,12 +299,7 @@ function ToastItem({ toast }: ToastItemProps) {
         <Toast.Message className="flex-1 text-sm">
           {toast.message}
         </Toast.Message>
-        <Toast.Close
-          className="opacity-70 hover:opacity-100"
-          onClick={startClosing}
-        >
-          ×
-        </Toast.Close>
+        <Toast.Close className="opacity-70 hover:opacity-100">×</Toast.Close>
       </Toast.Content>
     </Toast>
   );

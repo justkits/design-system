@@ -155,7 +155,9 @@ pnpm add @justkits/feedback @justkits/headless-ui
 
 `@justkits/headless-ui`의 `Alert`를 사용해 컴포넌트를 조합한다.
 
-> `isOpen={true}`를 전달한다 — `Alerter`는 alert가 활성화된 동안에만 컴포넌트를 렌더하므로, 마운트된 시점에는 항상 열린 상태다.
+> `isOpen`를 전달한다 — `Alerter`는 alert가 활성화된 동안에만 컴포넌트를 렌더하므로, 마운트된 시점에는 항상 열린 상태다.
+
+> `Alerter`가 이미 `portal` 처리를 하기 때문에, `portal` property는 굳이 사용하지 않아도 괜찮다.
 
 ```tsx
 // components/AlertComponent.tsx
@@ -164,9 +166,9 @@ import { Alert } from "@justkits/headless-ui";
 
 export function AlertComponent({ alert }: AlertComponentProps) {
   return (
-    <Alert isOpen={true}>
-      <Alert.Overlay className="fixed inset-0 bg-black/50" />
-      <Alert.Content className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white rounded-xl p-6 shadow-lg w-80">
+    <Alert isOpen>
+      <Alert.Overlay className="bg-black/50" />
+      <Alert.Content className="fixed! top-1/2! left-1/2! -translate-x-1/2! -translate-y-1/2! bg-white rounded-xl p-6 shadow-lg w-80">
         <Alert.Title className="text-lg font-semibold mb-2">
           {alert.title}
         </Alert.Title>
@@ -192,9 +194,9 @@ import { Alert } from "@justkits/headless-ui";
 
 export function ConfirmComponent({ confirm }: ConfirmComponentProps) {
   return (
-    <Alert isOpen={true}>
-      <Alert.Overlay className="fixed inset-0 bg-black/50" />
-      <Alert.Content className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white rounded-xl p-6 shadow-lg w-80">
+    <Alert isOpen>
+      <Alert.Overlay className="bg-black/50" />
+      <Alert.Content className="fixed! top-1/2! left-1/2! -translate-x-1/2! -translate-y-1/2! bg-white rounded-xl p-6 shadow-lg w-80">
         <Alert.Title className="text-lg font-semibold mb-2">
           {confirm.title}
         </Alert.Title>
