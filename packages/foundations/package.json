@@ -15,7 +15,8 @@
       "import": "./dist/index.js",
       "types": "./dist/index.d.ts"
     },
-    "./reset.css": "./dist/reset.css"
+    "./reset.css": "./dist/reset.css",
+    "./theme.css": "./dist/theme.css"
   },
   "files": [
     "dist",
