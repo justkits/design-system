@@ -1,5 +1,11 @@
 # @justkits/design-foundations
 
+## 1.2.0
+
+### Minor Changes
+
+- [#62](https://github.com/justkits/design-system/pull/62) [`49cb82c`](https://github.com/justkits/design-system/commit/49cb82cfceb71be5e781d6e417da782dc637ec88) Thanks [@justwon0307](https://github.com/justwon0307)! - Update foundation tokens, and export token variables and token css variables
+
 ## 1.1.1
 
 ### Patch Changes
