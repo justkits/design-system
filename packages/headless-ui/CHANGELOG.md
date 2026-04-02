@@ -1,5 +1,11 @@
 # @justkits/headless-ui
 
+## 0.4.1
+
+### Patch Changes
+
+- [#68](https://github.com/justkits/design-system/pull/68) [`9896885`](https://github.com/justkits/design-system/commit/9896885efa5dfce5bfc220ac4ce9c860e5ab8a32) Thanks [@justwon0307](https://github.com/justwon0307)! - Export TagOptions type
+
 ## 0.4.0
 
 ### Minor Changes
