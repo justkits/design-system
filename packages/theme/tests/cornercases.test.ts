@@ -4,7 +4,7 @@ import {
   setMode,
   subscribe,
   subscribeToSystemTheme,
-} from "@/theme/manager";
+} from "@/manager";
 
 // theme/core/lib/ 내 함수들의 globalThis가 null인 코너케이스 테스트
 // 단순 커버리지 채우기 용도
@@ -36,7 +36,7 @@ describe("core manager cornercases", () => {
 
   it("loadStoredMode should return 'system' when window is undefined", async () => {
     vi.resetModules();
-    const { getSnapshot } = await import("@/theme/manager");
+    const { getSnapshot } = await import("@/manager");
     expect(getSnapshot()).toBe("system");
   });
 
@@ -75,7 +75,7 @@ describe("loadStoredMode with valid stored value", () => {
         writable: true,
       });
       vi.resetModules();
-      const { getSnapshot } = await import("@/theme/manager");
+      const { getSnapshot } = await import("@/manager");
       expect(getSnapshot()).toBe(storedMode);
     },
   );

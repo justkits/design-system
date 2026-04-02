@@ -1,0 +1,48 @@
+{
+  "name": "@justkits/theme",
+  "description": "JustKits Design System - Theme",
+  "version": "0.0.0",
+  "private": false,
+  "type": "module",
+  "keywords": [
+    "theme",
+    "light mode",
+    "dark mode",
+    "react",
+    "typescript"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.mts",
+      "import": "./dist/index.mjs"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "author": "JustWon",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/justkits/design-system.git",
+    "directory": "packages/theme"
+  },
+  "publishConfig": {
+    "access": "restricted",
+    "registry": "https://npm.pkg.github.com/"
+  },
+  "license": "SEE LICENSE IN REPOSITORY",
+  "scripts": {
+    "prebuild": "rm -rf dist",
+    "build": "tsdown",
+    "dev": "tsdown --watch",
+    "typecheck": "tsc --noEmit"
+  },
+  "peerDependencies": {
+    "react": "^19"
+  },
+  "devDependencies": {
+    "@justkits/tsconfig": "workspace:*",
+    "typescript": "catalog:"
+  }
+}
