@@ -17,6 +17,7 @@ import {
 } from "./manager";
 import { ThemeContext } from "./useTheme";
 import { ResolvedTheme } from "./types";
+import "./theme.css";
 
 interface Props {
   children: ReactNode;
