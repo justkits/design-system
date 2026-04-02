@@ -25,15 +25,15 @@ describe("BaseSvgBuilder", () => {
     await builder.generate();
 
     expect(atomicWrite).toHaveBeenCalledWith(
-      expect.stringContaining("media/components/Test.tsx"),
+      expect.stringContaining("media/Test.tsx"),
       expect.any(String),
     );
     expect(atomicWrite).toHaveBeenCalledWith(
-      expect.stringContaining("media/components/SecondTest.tsx"),
+      expect.stringContaining("media/SecondTest.tsx"),
       expect.any(String),
     );
     expect(atomicWrite).toHaveBeenCalledWith(
-      expect.stringContaining("action/components/Arrow.tsx"),
+      expect.stringContaining("action/Arrow.tsx"),
       expect.any(String),
     );
   });
@@ -46,15 +46,11 @@ describe("BaseSvgBuilder", () => {
 
     expect(atomicWrite).toHaveBeenCalledWith(
       expect.stringContaining("media/index.ts"),
-      expect.stringContaining(
-        'export { TestIcon } from "./components/TestIcon";',
-      ),
+      expect.stringContaining('export { TestIcon } from "./TestIcon";'),
     );
     expect(atomicWrite).toHaveBeenCalledWith(
       expect.stringContaining("action/index.ts"),
-      expect.stringContaining(
-        'export { ArrowIcon } from "./components/ArrowIcon";',
-      ),
+      expect.stringContaining('export { ArrowIcon } from "./ArrowIcon";'),
     );
 
     expect(atomicWrite).toHaveBeenCalledWith(

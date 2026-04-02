@@ -23,36 +23,32 @@ describe("StandaloneSvgBuilder", () => {
 
     // Verify component files were written
     expect(atomicWrite).toHaveBeenCalledWith(
-      expect.stringContaining("components/TestIcon.tsx"),
+      expect.stringContaining("TestIcon.tsx"),
       expect.any(String),
     );
     expect(atomicWrite).toHaveBeenCalledWith(
-      expect.stringContaining("components/SecondTestIcon.tsx"),
+      expect.stringContaining("SecondTestIcon.tsx"),
       expect.any(String),
     );
     expect(atomicWrite).toHaveBeenCalledWith(
-      expect.stringContaining("components/ArrowIcon.tsx"),
+      expect.stringContaining("ArrowIcon.tsx"),
       expect.any(String),
     );
 
     // Verify root barrel file was written
     expect(atomicWrite).toHaveBeenCalledWith(
       expect.stringContaining("src/index.ts"),
-      expect.stringContaining(
-        'export { TestIcon } from "./components/TestIcon";',
-      ),
+      expect.stringContaining('export { TestIcon } from "./TestIcon";'),
     );
     expect(atomicWrite).toHaveBeenCalledWith(
       expect.stringContaining("src/index.ts"),
       expect.stringContaining(
-        'export { SecondTestIcon } from "./components/SecondTestIcon";',
+        'export { SecondTestIcon } from "./SecondTestIcon";',
       ),
     );
     expect(atomicWrite).toHaveBeenCalledWith(
       expect.stringContaining("src/index.ts"),
-      expect.stringContaining(
-        'export { ArrowIcon } from "./components/ArrowIcon";',
-      ),
+      expect.stringContaining('export { ArrowIcon } from "./ArrowIcon";'),
     );
   });
 
@@ -82,15 +78,15 @@ describe("StandaloneSvgBuilder", () => {
 
     // Verify component files were written
     expect(atomicWrite).toHaveBeenCalledWith(
-      expect.stringContaining("components/TestIcon.tsx"),
+      expect.stringContaining("TestIcon.tsx"),
       expect.any(String),
     );
     expect(atomicWrite).toHaveBeenCalledWith(
-      expect.stringContaining("components/SecondTestIcon.tsx"),
+      expect.stringContaining("SecondTestIcon.tsx"),
       expect.any(String),
     );
     expect(atomicWrite).toHaveBeenCalledWith(
-      expect.stringContaining("components/ArrowIcon.tsx"),
+      expect.stringContaining("ArrowIcon.tsx"),
       expect.any(String),
     );
 

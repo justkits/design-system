@@ -95,8 +95,7 @@ export default defineConfig({
     template: (variables, { tpl }) => {
       return tpl`
         ${variables.imports}
-        import type { IconProps } from '../types'; 
-        // ⚠️ Family 모드는 '../types', Standalone 모드는 './types' 경로 주의
+        import type { IconProps } from './types';
 
         export function ${variables.componentName}({ size = 24, color = "currentColor", ...props }: IconProps) {
           return (${variables.jsx});
@@ -107,7 +106,7 @@ export default defineConfig({
 });
 ```
 
-> **주의**: `FamilySvgBuilder`를 사용하는 경우 컴포넌트가 하위 폴더(`src/category/components/`)에 생성되므로 `types.ts`를 import 할 때 `../../../types` 등의 경로 조정이 필요할 수 있다. 프로젝트 구조에 맞게 import 경로를 설정해야 한다.
+> **주의**: `FamilySvgBuilder`를 사용하는 경우 컴포넌트가 하위 폴더(`src/category/`)에 생성되므로 `types.ts`를 import 할 때 `../types` 등의 경로 조정이 필요할 수 있다. 프로젝트 구조에 맞게 import 경로를 설정해야 한다.
 
 더 자세한 템플릿 작성 방법은 [SVGR Custom Template](https://react-svgr.com/docs/templates/) 문서를 참고한다.
 

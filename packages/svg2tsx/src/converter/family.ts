@@ -62,7 +62,7 @@ export class FamilySvgBuilder extends BaseSvgBuilder {
 
       for (const componentName of componentNames) {
         familyBarrelLines.push(
-          `export { ${componentName} } from "./components/${componentName}";`,
+          `export { ${componentName} } from "./${componentName}";`,
         );
       }
       rootBarrelLines.push(
@@ -97,7 +97,7 @@ export class FamilySvgBuilder extends BaseSvgBuilder {
     const componentPath = join(
       this.SRC_DIR,
       familyName,
-      `components/${componentName}.tsx`,
+      `${componentName}.tsx`,
     );
     await this.writeFile(componentPath, content);
     this.trackGeneratedFile(componentPath);

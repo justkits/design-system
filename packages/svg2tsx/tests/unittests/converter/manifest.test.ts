@@ -28,7 +28,7 @@ describe("Manifest Generation and Cleanup", () => {
 
     expect(atomicWrite).toHaveBeenCalledWith(
       manifestPath,
-      expect.stringContaining("media/components/Test.tsx"),
+      expect.stringContaining("media/Test.tsx"),
     );
 
     // Check if the content passed to atomicWrite is a valid JSON array of relative paths
@@ -38,7 +38,7 @@ describe("Manifest Generation and Cleanup", () => {
     expect(lastCall).toBeDefined();
     const content = JSON.parse(lastCall![1]);
     expect(Array.isArray(content)).toBe(true);
-    expect(content).toContain("src/media/components/Test.tsx");
+    expect(content).toContain("src/media/Test.tsx");
   });
 
   it("should clean up files based on manifest", async () => {

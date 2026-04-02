@@ -47,8 +47,8 @@ svg2tsx는 생성된 파일을 추적하기 위해 프로젝트 루트(`baseDir`
 
 ```json
 [
-  "src/media/components/Album.tsx",
-  "src/media/components/Video.tsx",
+  "src/media/Album.tsx",
+  "src/media/Video.tsx",
   "src/media/index.ts",
   "src/index.ts"
 ]
@@ -82,15 +82,13 @@ assets/
 ```text
 src/
   ├── media/
-  │   ├── components/
-  │   │   ├── Album.tsx
-  │   │   ├── Video.tsx
-  │   │   └── Upload.tsx
+  │   ├── Album.tsx
+  │   ├── Video.tsx
+  │   ├── Upload.tsx
   │   └── index.ts          // export { Album, Video, Upload }
   ├── app/
-  │   ├── components/
-  │   │   ├── Settings.tsx
-  │   │   └── ChevronDown.tsx
+  │   ├── Settings.tsx
+  │   ├── ChevronDown.tsx
   │   └── index.ts
   └── index.ts              // export { Album, Video, ... } from "./media"
 ```
@@ -113,10 +111,9 @@ assets/
 
 ```text
 src/
-  ├── components/
-  │   ├── Album.tsx
-  │   ├── Video.tsx
-  │   ├── Settings.tsx
-  │   └── Twitter.tsx
+  ├── Album.tsx
+  ├── Video.tsx
+  ├── Settings.tsx
+  ├── Twitter.tsx
   └── index.ts              // export { Album, Video, Settings, Twitter }
 ```

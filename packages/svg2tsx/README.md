@@ -82,8 +82,8 @@ pnpm svg2tsx generate --dry-run
 
 ### 3. 디렉토리 구조
 
-- **FamilySvgBuilder**: `assets/[category]/[icon-name].svg` 구조 필수
-- **StandaloneSvgBuilder**: `assets/[icon-name].svg` 플랫 구조 사용
+- **FamilySvgBuilder**: `assets/[category]/[icon-name].svg` → `src/[category]/[Icon].tsx`
+- **StandaloneSvgBuilder**: `assets/[icon-name].svg` → `src/[Icon].tsx`
 
 ### 4. 출력 경로 및 파일 보존
 

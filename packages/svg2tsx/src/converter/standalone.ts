@@ -53,7 +53,7 @@ export class StandaloneSvgBuilder extends BaseSvgBuilder {
 
     for (const componentName of sortedComponentNames) {
       barrelLines.push(
-        `export { ${componentName} } from "./components/${componentName}";`,
+        `export { ${componentName} } from "./${componentName}";`,
       );
     }
 
@@ -67,8 +67,7 @@ export class StandaloneSvgBuilder extends BaseSvgBuilder {
     content: string,
     componentName: string,
   ): Promise<void> {
-    const componentDir = join(this.SRC_DIR, "components");
-    const componentPath = join(componentDir, `${componentName}.tsx`);
+    const componentPath = join(this.SRC_DIR, `${componentName}.tsx`);
 
     await this.writeFile(componentPath, content);
     this.trackGeneratedFile(componentPath);

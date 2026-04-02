@@ -7,8 +7,8 @@ export type Platform = "web" | "native";
 export interface SvgsConfig {
   /**
    * Type of builder to use.
-   * - 'family': assets/[family]/[icon].svg -> src/[family]/components/[Icon].tsx
-   * - 'standalone': assets/[icon].svg -> src/components/[Icon].tsx
+   * - 'family': assets/[family]/[icon].svg -> src/[family]/[Icon].tsx
+   * - 'standalone': assets/[icon].svg -> src/[Icon].tsx
    * @default 'standalone'
    */
   type?: BuilderType;
