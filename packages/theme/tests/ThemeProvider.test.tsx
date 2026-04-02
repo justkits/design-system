@@ -1,8 +1,8 @@
 import { fireEvent, render, waitFor } from "@testing-library/react";
 
-import { ThemeProvider } from "@/theme/ThemeProvider";
-import { useTheme } from "@/theme/useTheme";
-import { setMode } from "@/theme/manager";
+import { ThemeProvider } from "@/ThemeProvider";
+import { useTheme } from "@/useTheme";
+import { setMode } from "@/manager";
 
 const TestComponent = () => {
   const { mode, setThemeMode } = useTheme();
