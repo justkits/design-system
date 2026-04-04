@@ -1,5 +1,11 @@
 # @justkits/design-foundations
 
+## 1.5.0
+
+### Minor Changes
+
+- [#92](https://github.com/justkits/design-system/pull/92) [`2fab954`](https://github.com/justkits/design-system/commit/2fab95489cfa3ac498300c62a82954c8a5c107ae) Thanks [@justwon0307](https://github.com/justwon0307)! - Rework radius tokens
+
 ## 1.4.0
 
 ### Minor Changes
