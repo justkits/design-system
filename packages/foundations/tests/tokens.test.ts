@@ -160,7 +160,7 @@ describe("font tokens", () => {
 
 describe("radius tokens", () => {
   it("radiusVariables has all required keys", () => {
-    const keys = ["sm", "md", "lg", "full"] as const;
+    const keys = ["xs", "sm", "md", "lg", "xl", "full"] as const;
     for (const key of keys) {
       expect(rv[key]).toBeDefined();
     }
