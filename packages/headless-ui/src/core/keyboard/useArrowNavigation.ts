@@ -59,11 +59,9 @@ export function useArrowNavigation(
         return;
       }
 
-      if (key === "ArrowUp") {
-        const prev =
-          currentIndex <= 0 ? focusables.length - 1 : currentIndex - 1;
-        focusables[prev].focus();
-      }
+      // 남은건 ArrowUp
+      const prev = currentIndex <= 0 ? focusables.length - 1 : currentIndex - 1;
+      focusables[prev].focus();
     };
 
     document.addEventListener("keydown", handleKeyDown);
