@@ -5,6 +5,11 @@ const lg = 1279; // Tablet Landscape: 1024px - 1279px
 const xl = 1440; // Desktop: 1280px and above
 
 export const breakpointQueries = {
+  simple: {
+    small: `screen and (max-width: ${sm}px)`,
+    medium: `screen and (min-width: ${sm + 1}px) and (max-width: ${lg}px)`,
+    large: `screen and (min-width: ${lg + 1}px)`,
+  },
   only: {
     mobilePortrait: `screen and (max-width: ${xs}px)`,
     mobileLandscape: `screen and ((min-width: ${xs + 1}px) and (max-width: ${sm}px))`,
