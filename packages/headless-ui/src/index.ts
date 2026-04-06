@@ -8,6 +8,8 @@ export type { TagOptions, TextVariants } from "./Texts";
 export { Divider } from "./Divider";
 export type { DividerProps } from "./Divider";
 
+export { ExternalPortal as Portal } from "./core/portal";
+
 // Compound Components
 export { Alert } from "./Alert";
 export { Modal } from "./Modal";

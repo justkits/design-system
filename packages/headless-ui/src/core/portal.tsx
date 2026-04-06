@@ -25,3 +25,10 @@ export function Portal({ children, isPortalMode }: PortalProps) {
 
   return createPortal(children, document.body);
 }
+
+// export할 Portal
+export function ExternalPortal({
+  children,
+}: Readonly<{ children: ReactNode }>) {
+  return <Portal isPortalMode>{children}</Portal>;
+}
