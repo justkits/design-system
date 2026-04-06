@@ -1,5 +1,11 @@
 # @justkits/design-foundations
 
+## 1.6.0
+
+### Minor Changes
+
+- [#98](https://github.com/justkits/design-system/pull/98) [`3d52a0b`](https://github.com/justkits/design-system/commit/3d52a0b55d22def5ed734ac03b78df6398e6e758) Thanks [@justwon0307](https://github.com/justwon0307)! - Add simple breakpoint queries
+
 ## 1.5.0
 
 ### Minor Changes
