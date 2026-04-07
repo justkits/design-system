@@ -12,7 +12,6 @@ const overlay: CSSProperties = {
 };
 
 const alert: CSSProperties = {
-  position: "relative",
   zIndex: zIndices.alert,
 };
 
