@@ -17,6 +17,7 @@ export function useForm() {
 }
 
 type FormFieldContextValue = {
+  required: boolean;
   controlId: string;
   descriptionId: string | undefined;
   setDescriptionId: (id: string | undefined) => void;

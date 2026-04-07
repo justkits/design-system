@@ -4,9 +4,13 @@ import { FormFieldContext, useForm } from "./internals/contexts";
 
 type FieldProps = {
   children: ReactNode;
+  required?: boolean;
 };
 
-export function FormField({ children }: Readonly<FieldProps>) {
+export function FormField({
+  children,
+  required = false,
+}: Readonly<FieldProps>) {
   useForm();
   const controlId = useId();
   const [descriptionId, setDescriptionId] = useState<string | undefined>(
@@ -16,13 +20,14 @@ export function FormField({ children }: Readonly<FieldProps>) {
 
   const contextValue = useMemo(
     () => ({
+      required,
       controlId,
       descriptionId,
       setDescriptionId,
       errorId,
       setErrorId,
     }),
-    [controlId, descriptionId, errorId],
+    [required, controlId, descriptionId, errorId],
   );
 
   return (

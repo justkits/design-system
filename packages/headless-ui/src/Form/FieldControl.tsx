@@ -9,7 +9,7 @@ type FieldControlProps = {
 
 export function FieldControl({ children }: Readonly<FieldControlProps>) {
   const { disabled } = useForm();
-  const { controlId, descriptionId, errorId } = useField(
+  const { required, controlId, descriptionId, errorId } = useField(
     "Field.Control must be used within the Field wrapper.",
   );
 
@@ -20,6 +20,7 @@ export function FieldControl({ children }: Readonly<FieldControlProps>) {
     <AsChild
       id={controlId}
       disabled={disabled}
+      required={required}
       aria-invalid={errorId ? "true" : undefined}
       aria-describedby={ariaDescribedBy}
     >
