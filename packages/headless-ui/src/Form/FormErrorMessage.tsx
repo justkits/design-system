@@ -20,21 +20,25 @@ type FormError = (NormalProps | AsChildProps) &
     "id" | "children" | "role" | "aria-live" | "tabIndex"
   >;
 
-export function FormError({ asChild = false, children, ...props }: FormError) {
+export function FormErrorMessage({
+  asChild = false,
+  children,
+  ...rest
+}: FormError) {
   useForm();
   const ref = useRef<HTMLDivElement>(null);
   useAutoFocus(ref, true);
 
   if (asChild) {
     return (
-      <AsChild {...props} role="alert" aria-live="assertive" tabIndex={-1}>
+      <AsChild {...rest} role="alert" aria-live="assertive" tabIndex={-1}>
         {children}
       </AsChild>
     );
   }
 
   return (
-    <div {...props} ref={ref} role="alert" aria-live="assertive" tabIndex={-1}>
+    <div {...rest} ref={ref} role="alert" aria-live="assertive" tabIndex={-1}>
       {children}
     </div>
   );
