@@ -1,5 +1,15 @@
 # @justkits/headless-ui
 
+## 0.10.4
+
+### Patch Changes
+
+- [#110](https://github.com/justkits/design-system/pull/110) [`7b377d1`](https://github.com/justkits/design-system/commit/7b377d10c3f92b7e13a401c51b605776887ceb9c) Thanks [@justwon0307](https://github.com/justwon0307)! - Simplify TextInput: let Field handle the rest
+
+- [#110](https://github.com/justkits/design-system/pull/110) [`237d04e`](https://github.com/justkits/design-system/commit/237d04e2571cc50558530e31314d1fb4a360dab4) Thanks [@justwon0307](https://github.com/justwon0307)! - Split Field from Form, and export independently
+
+- [#110](https://github.com/justkits/design-system/pull/110) [`7b377d1`](https://github.com/justkits/design-system/commit/7b377d10c3f92b7e13a401c51b605776887ceb9c) Thanks [@justwon0307](https://github.com/justwon0307)! - Fix bug: spread remaining properties of Field.Label to children
+
 ## 0.10.3
 
 ### Patch Changes
