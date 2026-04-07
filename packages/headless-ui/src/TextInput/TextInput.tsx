@@ -1,40 +1,30 @@
-import { type InputHTMLAttributes, useId, useLayoutEffect } from "react";
+import { type InputHTMLAttributes } from "react";
 
 import { AsChild } from "@/core/asChild";
-import { useTextInput } from "./internals/contexts";
 
-type TextInputProps = { asChild?: boolean } & Omit<
+export type TextInputProps = {
+  asChild?: boolean;
+  type?: "text" | "password" | "email" | "url" | "search";
+} & Omit<
   InputHTMLAttributes<HTMLInputElement>,
-  | "id"
-  | "type"
-  | "aria-describedby"
-  | "aria-invalid"
-  | "aria-required"
-  | "required"
-  | "disabled"
+  "type" | "aria-required" | "aria-disabled"
 >;
 
 export function TextInput({
+  type = "text",
   asChild = false,
   children,
+  required,
+  disabled,
+  id,
   ...rest
 }: Readonly<TextInputProps>) {
-  const id = useId();
-  const { type, required, disabled, errorId, setInputId } = useTextInput();
-
-  useLayoutEffect(() => {
-    setInputId(id);
-    return () => setInputId(undefined);
-  }, [id, setInputId]);
-
   if (asChild) {
     return (
       <AsChild
         {...rest}
         id={id}
         type={type}
-        aria-describedby={errorId}
-        aria-invalid={!!errorId}
         aria-required={required}
         aria-disabled={disabled}
         required={required}
@@ -50,8 +40,6 @@ export function TextInput({
       {...rest}
       id={id}
       type={type}
-      aria-describedby={errorId}
-      aria-invalid={!!errorId}
       aria-required={required}
       aria-disabled={disabled}
       required={required}
