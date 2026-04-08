@@ -39,9 +39,7 @@
     "test:dev": "vitest --watch --coverage"
   },
   "devDependencies": {
-    "@justkits/tsconfig": "workspace:*",
-    "tsup": "catalog:",
-    "typescript": "catalog:"
+    "tsup": "catalog:"
   },
   "dependencies": {
     "@svgr/core": "^8.1.0",
