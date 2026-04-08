@@ -34,6 +34,7 @@
     "prebuild": "rm -rf dist",
     "build": "tsup",
     "dev": "tsup --watch",
+    "lint": "eslint .",
     "typecheck": "tsc --noEmit",
     "test": "vitest run"
   },
