@@ -6,7 +6,7 @@
   "scripts": {
     "prepare": "husky",
     "format": "prettier --write --log-level warn .",
-    "lint": "eslint .",
+    "lint": "turbo run lint",
     "test": "vitest run",
     "test:dev": "vitest run --watch --coverage",
     "dev": "turbo run dev",
@@ -18,10 +18,8 @@
   "devDependencies": {
     "@changesets/changelog-github": "^0.6.0",
     "@changesets/cli": "^2.30.0",
-    "@eslint/css": "^1.1.0",
-    "@eslint/js": "^9.39.4",
-    "@eslint/json": "^1.2.0",
-    "@eslint/markdown": "^8.0.1",
+    "@justkits/eslint-config": "workspace:*",
+    "@justkits/tsconfig": "workspace:*",
     "@justkits/vitest-config": "workspace:*",
     "@testing-library/react": "^16.3.2",
     "@tsdown/css": "^0.21.7",
@@ -29,10 +27,7 @@
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
     "@vitest/coverage-v8": "^4.1.2",
-    "eslint": "^9.39.4",
-    "eslint-plugin-react-hooks": "^7.0.1",
-    "eslint-plugin-react-refresh": "^0.5.2",
-    "globals": "^17.4.0",
+    "eslint": "catalog:",
     "husky": "^9.1.7",
     "jsdom": "^29.0.2",
     "lint-staged": "^16.4.0",
@@ -40,7 +35,6 @@
     "tsdown": "^0.21.7",
     "turbo": "^2.9.4",
     "typescript": "~5.9.3",
-    "typescript-eslint": "^8.58.0",
     "vitest": "^4.1.2"
   },
   "lint-staged": {
@@ -49,10 +43,5 @@
       "prettier --check",
       "eslint"
     ]
-  },
-  "pnpm": {
-    "overrides": {
-      "brace-expansion": "1.1.13"
-    }
   }
 }
