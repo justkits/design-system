@@ -8,6 +8,12 @@ import { baseEslintConfig } from "./_base";
 export const nextEslintConfig = defineConfig([
   {
     extends: [baseEslintConfig, reactRefresh.configs.next],
+    rules: {
+      "@typescript-eslint/consistent-type-imports": [
+        "error",
+        { prefer: "type-imports", fixStyle: "inline-type-imports" },
+      ],
+    },
   },
   ...nextVitals,
   ...nextTs,
