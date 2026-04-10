@@ -8,6 +8,11 @@ import { baseEslintConfig } from "./_base";
 export const nextEslintConfig = defineConfig([
   {
     extends: [baseEslintConfig, reactRefresh.configs.next],
+  },
+  ...nextVitals,
+  ...nextTs,
+  {
+    files: ["**/src/**/*.{ts,tsx}"],
     rules: {
       "@typescript-eslint/consistent-type-imports": [
         "error",
@@ -15,8 +20,6 @@ export const nextEslintConfig = defineConfig([
       ],
     },
   },
-  ...nextVitals,
-  ...nextTs,
   // Override default ignores of eslint-config-next.
   globalIgnores([
     // Default ignores of eslint-config-next:
