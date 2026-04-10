@@ -39,7 +39,7 @@ export function Header() {
         role="navigation"
         aria-label="Main Navigation"
       >
-        <Link href="/components">Primitives</Link>
+        <Link href="/primitives">Primitives</Link>
       </nav>
       <div className={styles.right}>
         <span>GithubLink</span>
