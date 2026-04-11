@@ -4,9 +4,12 @@
   "type": "module",
   "private": true,
   "exports": {
+    "./next": "./next.js",
     "./shared": "./shared.js"
   },
   "devDependencies": {
-    "@vitest/coverage-v8": "^4.1.2"
+    "@vanilla-extract/vite-plugin": "^5.2.2",
+    "@vitest/coverage-v8": "^4.1.4",
+    "jsdom": "^29.0.2"
   }
 }

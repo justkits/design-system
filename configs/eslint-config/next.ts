@@ -11,6 +11,15 @@ export const nextEslintConfig = defineConfig([
   },
   ...nextVitals,
   ...nextTs,
+  {
+    files: ["**/src/**/*.{ts,tsx}"],
+    rules: {
+      "@typescript-eslint/consistent-type-imports": [
+        "error",
+        { prefer: "type-imports", fixStyle: "inline-type-imports" },
+      ],
+    },
+  },
   // Override default ignores of eslint-config-next.
   globalIgnores([
     // Default ignores of eslint-config-next:

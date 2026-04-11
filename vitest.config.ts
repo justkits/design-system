@@ -5,13 +5,10 @@ export default defineConfig({
     projects: ["apps/*", "packages/*"],
     coverage: {
       exclude: [
-        "apps/*/src/**/index.ts",
-        "apps/*/src/**/main.ts",
-        "packages/*/src/**/index.ts",
-        "packages/foundations/src/tokens/typography/code.ts",
-        "packages/foundations/src/tokens/typography/quote.ts",
-        "packages/foundations/src/tokens/typography/text.ts",
+        "**/index.ts",
         "**/*/tests/*",
+        "**/dist/*",
+        "**/node_modules/*",
       ],
       provider: "v8",
       reporter: [["text", { skipFull: true }]],
