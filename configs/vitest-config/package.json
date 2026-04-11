@@ -5,7 +5,11 @@
   "private": true,
   "exports": {
     "./next": "./next.ts",
-    "./shared": "./shared.js"
+    "./shared": {
+      "require": "./shared.cjs",
+      "import": "./shared.mjs",
+      "default": "./shared.mjs"
+    }
   },
   "devDependencies": {
     "@vanilla-extract/vite-plugin": "^5.2.2",
