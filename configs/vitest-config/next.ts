@@ -3,6 +3,9 @@ import { vanillaExtractPlugin } from "@vanilla-extract/vite-plugin";
 
 export const nextConfig = defineConfig({
   plugins: [vanillaExtractPlugin()],
+  server: {
+    watch: null,
+  },
   resolve: {
     tsconfigPaths: true,
   },
