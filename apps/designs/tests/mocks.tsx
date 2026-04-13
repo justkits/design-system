@@ -8,12 +8,3 @@ vi.mock("next/font/google", () => ({
     className: "--font-kalam",
   }),
 }));
-vi.mock("@justkits/theme", async () => {
-  const actual = await vi.importActual("@justkits/theme");
-  return {
-    ...actual,
-    ThemeScript: () => <script>ThemeScript</script>,
-    ThemeProvider: ({ children }: { children: React.ReactNode }) => children,
-    useTheme: vi.fn().mockReturnValue({ mode: "light", setThemeMode: vi.fn() }),
-  };
-});

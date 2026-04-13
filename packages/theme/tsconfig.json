@@ -1,9 +1,0 @@
-{
-  "extends": "@justkits/tsconfig/base.json",
-  "compilerOptions": {
-    "paths": {
-      "@/*": ["./src/*"]
-    }
-  },
-  "include": ["**/*.ts", "**/*.tsx"]
-}
