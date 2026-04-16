@@ -15,10 +15,10 @@ export type Config = Svg2tsxConfig & SettableSvgrConfig;
 const DEFAULT_CONFIG_PATH = "svg2tsx.config.ts";
 
 export class ConfigManager {
-  private configFilePath: string | null;
+  private readonly configFilePath: string | null;
 
-  public static config: Required<Svg2tsxConfig>;
-  public static svgrConfig: SvgrConfig;
+  public static config: Required<Svg2tsxConfig>; // NOSONAR
+  public static svgrConfig: SvgrConfig; // NOSONAR
 
   constructor(configPath?: string) {
     this.configFilePath = this.validatePath(configPath);
@@ -69,7 +69,7 @@ export class ConfigManager {
         },
       };
     } else {
-      logger.info(`No config file... Proceesing with default config.`);
+      logger.info(`No config file... Processing with default config.`);
 
       ConfigManager.config = defaultConfig;
       ConfigManager.svgrConfig = defaultSvgrConfig;
