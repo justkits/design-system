@@ -17,8 +17,8 @@ const DEFAULT_CONFIG_PATH = "svg2tsx.config.ts";
 export class ConfigManager {
   private configFilePath: string | null;
 
-  private static config: Required<Svg2tsxConfig>;
-  private static svgrConfig: SvgrConfig;
+  public static config: Required<Svg2tsxConfig>;
+  public static svgrConfig: SvgrConfig;
 
   constructor(configPath?: string) {
     this.configFilePath = this.validatePath(configPath);
