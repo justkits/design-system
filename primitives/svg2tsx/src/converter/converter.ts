@@ -11,6 +11,7 @@ import { Validator } from "./validator";
 export class Converter {
   private dirType: "family" | "flat" = "flat";
   private svgFiles: string[];
+  private loaded = false;
   private readonly families: Map<string, Family>;
 
   private readonly validator: Validator;
@@ -31,6 +32,7 @@ export class Converter {
       cwd: resolve(ConfigManager.config.srcDir),
     });
     this.svgFiles = svgFiles;
+    this.loaded = true;
   }
 
   private validateSvgFiles() {
@@ -54,6 +56,8 @@ export class Converter {
   }
 
   public async processIcons() {
+    this.preProcess();
+
     // validation에서는 registry에서 중복체크를 하기 때문에, 병렬로 처리하지 않는다.
     for (const svgPath of this.svgFiles) {
       const icon = await this.getIconMetadata(svgPath);
@@ -65,6 +69,17 @@ export class Converter {
     await Promise.all(
       Array.from(this.families.values()).map((family) => family.prepare()),
     );
+  }
+
+  private preProcess() {
+    if (!this.loaded) {
+      throw new Error(
+        "SVG files have not been loaded. Call scanAssets() first.",
+      );
+    }
+    if (this.svgFiles.length === 0) {
+      throw new Error("No SVG files to process.");
+    }
   }
 
   private async getIconMetadata(svgPath: string): Promise<IconMetadata> {
