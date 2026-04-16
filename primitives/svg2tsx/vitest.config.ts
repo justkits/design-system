@@ -6,7 +6,7 @@ const config = defineProject({
   test: {
     root: __dirname,
     environment: "node",
-    setupFiles: ["tests/setup/vitest.setup.ts"],
+    setupFiles: ["tests/mocks.ts"],
   },
 });
 
