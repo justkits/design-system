@@ -145,14 +145,7 @@ importers:
 
   primitives/foundations: {}
 
-  primitives/headless-ui:
-    dependencies:
-      react:
-        specifier: ^19
-        version: 19.2.4
-      react-dom:
-        specifier: ^19
-        version: 19.2.4(react@19.2.4)
+  primitives/headless-ui: {}
 
   primitives/svg2tsx: {}
 
