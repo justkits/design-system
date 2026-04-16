@@ -7,8 +7,15 @@ export type Svg2tsxConfig = {
   mode?: "barrel" | "facade" | "both";
 
   /**
-   * Suffix to append to the component name
+   * Facade 컴포넌트에 붙는 접미사
+   * Flat 구조에서는 이 접미사가 컴포넌트 이름 전체가 된다.
    * @default "Icon"
+   */
+  facadeSuffix?: string;
+
+  /**
+   * Suffix to append to the component name
+   * @default ""
    */
   suffix?: string;
 
@@ -28,7 +35,8 @@ export type Svg2tsxConfig = {
 export const defaultConfig: Required<Svg2tsxConfig> = {
   // svg2tsx
   mode: "barrel",
-  suffix: "Icon",
+  facadeSuffix: "Icon",
+  suffix: "",
   srcDir: "assets",
   outDir: "src",
 };

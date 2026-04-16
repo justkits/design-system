@@ -52,10 +52,12 @@ export class ConfigManager {
     if (this.configFilePath) {
       const userConfig = await this.readConfigFile(this.configFilePath);
 
-      const { mode, suffix, srcDir, outDir, ...svgrConfig } = userConfig;
+      const { mode, facadeSuffix, suffix, srcDir, outDir, ...svgrConfig } =
+        userConfig;
 
       ConfigManager.config = {
         mode: mode ?? defaultConfig.mode,
+        facadeSuffix: facadeSuffix ?? defaultConfig.facadeSuffix,
         suffix: suffix ?? defaultConfig.suffix,
         srcDir: srcDir ?? defaultConfig.srcDir,
         outDir: outDir ?? defaultConfig.outDir,
