@@ -2,7 +2,7 @@
 export function kebabToPascal(str: string): string {
   if (!/^[a-z][a-z0-9]*(-[a-z0-9]+)*$/.test(str)) {
     throw new Error(
-      `Invalid filename: "${str}". Filenames must be strictly kebab-case (lowercase letters, digits, and hyphens only, e.g., "my-icon" or "icon-2x").`,
+      `Invalid icon name: "${str}". Filenames must be strictly kebab-case (lowercase letters, digits, and hyphens only, e.g., "my-icon" or "icon-2x").`,
     );
   }
 
