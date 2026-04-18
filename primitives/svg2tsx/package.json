@@ -33,8 +33,6 @@
   "scripts": {
     "prebuild": "rm -rf dist",
     "build": "tsdown",
-    "test": "vitest run",
-    "test:dev": "vitest --watch --coverage",
     "lint": "eslint .",
     "typecheck": "tsc --noEmit"
   },
