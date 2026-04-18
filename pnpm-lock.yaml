@@ -141,15 +141,13 @@ importers:
         specifier: ^29.0.2
         version: 29.0.2
 
-  design-system/ui:
-    devDependencies:
-      '@justkits/svg2tsx':
-        specifier: workspace:*
-        version: link:../../primitives/svg2tsx
-
   primitives/alert: {}
 
-  primitives/foundations: {}
+  primitives/foundations:
+    dependencies:
+      react:
+        specifier: ^19
+        version: 19.2.4
 
   primitives/headless-ui: {}
 
