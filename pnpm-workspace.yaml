@@ -3,6 +3,7 @@ packages:
   - configs/*
   - design/primitives/*
   - design/system/*
+  - packages/*
 
 ignoredBuiltDependencies:
   - sharp

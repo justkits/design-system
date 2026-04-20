@@ -1,0 +1,42 @@
+{
+  "name": "@justkits/docs",
+  "description": "JustKits Docs - Automated Sidebar Generation for Documentation Websites",
+  "version": "0.0.0",
+  "private": false,
+  "type": "module",
+  "keywords": [
+    "documentation",
+    "sidebar",
+    "react",
+    "typescript"
+  ],
+  "author": "JustWon",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/justkits/justkits.git",
+    "directory": "packages/docs"
+  },
+  "license": "UNLICENSED",
+  "files": [
+    "dist"
+  ],
+  "publishConfig": {
+    "access": "restricted",
+    "registry": "https://npm.pkg.github.com/"
+  },
+  "exports": {
+    "./next": {
+      "types": "./dist/next.d.mts",
+      "default": "./dist/next.mjs"
+    },
+    "./sidebar": {
+      "types": "./dist/sidebar.d.mts",
+      "default": "./dist/sidebar.mjs"
+    }
+  },
+  "scripts": {
+    "prebuild": "rm -rf dist",
+    "dev": "tsdown --watch",
+    "lint": "eslint ."
+  }
+}
