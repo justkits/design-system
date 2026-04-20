@@ -28,28 +28,33 @@ export const textCSSVariables: TextTokens = {
 
 export const typographyVariables: TypographyTokens = {
   fontSize: {
-    headingSmall: "16px",
-    headingMedium: "20px",
-    headingLarge: "24px",
-    bodySmall: "14px",
-    bodyMedium: "16px",
-    bodyLarge: "18px",
+    headingSmall: "font-size-heading-sm",
+    headingMedium: "font-size-heading-md",
+    headingLarge: "font-size-heading-lg",
+    bodySmall: "font-size-body-sm",
+    bodyMedium: "font-size-body-md",
+    bodyLarge: "font-size-body-lg",
   },
   lineHeight: {
-    headingSmall: "24px",
-    headingMedium: "28px",
-    headingLarge: "32px",
-    bodySmall: "20px",
-    bodyMedium: "24px",
-    bodyLarge: "28px",
+    headingSmall: "line-height-heading-sm",
+    headingMedium: "line-height-heading-md",
+    headingLarge: "line-height-heading-lg",
+    bodySmall: "line-height-body-sm",
+    bodyMedium: "line-height-body-md",
+    bodyLarge: "line-height-body-lg",
   },
   fontWeight: {
-    regular: "400",
-    medium: "500",
-    semibold: "600",
-    bold: "700",
+    regular: "font-weight-regular",
+    medium: "font-weight-medium",
+    semibold: "font-weight-semibold",
+    bold: "font-weight-bold",
   },
-  fontFamily: {},
+  fontFamily: {
+    brand: "font-family-brand",
+    normal: "font-family-normal",
+    code: "font-family-code",
+    quote: "font-family-quote",
+  },
 };
 
 export const typographyCSSVariables: TypographyTokens = {
@@ -75,5 +80,10 @@ export const typographyCSSVariables: TypographyTokens = {
     semibold: "var(--font-weight-semibold)",
     bold: "var(--font-weight-bold)",
   },
-  fontFamily: {},
+  fontFamily: {
+    brand: "var(--font-family-brand)",
+    normal: "var(--font-family-normal)",
+    code: "var(--font-family-code)",
+    quote: "var(--font-family-quote)",
+  },
 };
