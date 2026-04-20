@@ -1,3 +1,3 @@
-import { Config } from "eslint/config";
+import type { Config } from "eslint/config";
 
 export declare const baseEslintConfig: Config;
