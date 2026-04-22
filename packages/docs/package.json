@@ -55,5 +55,8 @@
       "eslint",
       "prettier --check"
     ]
+  },
+  "devDependencies": {
+    "@justkits/ui": "workspace:*"
   }
 }

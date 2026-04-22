@@ -1,4 +1,6 @@
-import { useSidebar } from "./contexts";
+import { Button } from "@justkits/ui/Buttons";
+
+import { useInternalSidebar, useSidebar } from "./contexts";
 
 type Props = {
   children: React.ReactNode;
@@ -9,9 +11,14 @@ type Props = {
 
 export function SidebarToggle({ children, ...rest }: Props) {
   const { isExpanded, toggleSidebar, contentId } = useSidebar();
+  const { isMounted } = useInternalSidebar();
+
+  if (!isMounted) return null;
 
   return (
-    <button
+    <Button
+      variant="transparent"
+      size="small"
       {...rest}
       onClick={toggleSidebar}
       aria-controls={contentId}
@@ -19,6 +26,6 @@ export function SidebarToggle({ children, ...rest }: Props) {
       data-expanded={isExpanded}
     >
       {children}
-    </button>
+    </Button>
   );
 }

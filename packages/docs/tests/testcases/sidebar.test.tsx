@@ -50,9 +50,9 @@ describe("Sidebar Integration", () => {
       } as DocsGroup,
     ];
 
-    const { getByTestId } = render(
+    const { getByTestId, getByText } = render(
       <SidebarProvider>
-        <SidebarToggle data-testid="toggle">Toggle</SidebarToggle>
+        <SidebarToggle>Toggle</SidebarToggle>
         <Sidebar
           items={items}
           SidebarItemComponent={({ item }) => <div>{item.label}</div>}
@@ -61,7 +61,7 @@ describe("Sidebar Integration", () => {
       </SidebarProvider>,
     );
 
-    const toggle = getByTestId("toggle");
+    const toggle = getByText("Toggle");
     const sidebar = getByTestId("sidebar");
 
     // 초기에는 열려있어야 한다.
@@ -87,23 +87,6 @@ describe("Sidebar Integration", () => {
     );
   });
 
-  it("warns in console if toggle is used without mounting sidebar", () => {
-    vi.stubEnv("NODE_ENV", "development");
-
-    const { getByTestId } = render(
-      <SidebarProvider>
-        <SidebarToggle data-testid="toggle">Toggle</SidebarToggle>
-      </SidebarProvider>,
-    );
-
-    const toggle = getByTestId("toggle");
-    fireEvent.click(toggle);
-
-    expect(warnSpy).toHaveBeenCalledWith(
-      "Sidebar is not mounted. Please mount the Sidebar before toggling.",
-    );
-  });
-
   describe("corner cases", () => {
     it("doesn't warn if multiple sidebars are mounted in production mode", () => {
       vi.stubEnv("NODE_ENV", "production");
@@ -120,16 +103,39 @@ describe("Sidebar Integration", () => {
       );
     });
 
-    it("doesn't warn if toggle is used without mounting sidebar in production mode", () => {
-      vi.stubEnv("NODE_ENV", "production");
+    const TestComponent = () => {
+      const { toggleSidebar } = useSidebar();
 
-      const { getByTestId } = render(
+      return <button onClick={toggleSidebar}>Toggle</button>;
+    };
+
+    it("warns in console if toggleSidebar is called without mounting sidebar", () => {
+      vi.stubEnv("NODE_ENV", "development");
+
+      const { getByText } = render(
         <SidebarProvider>
-          <SidebarToggle data-testid="toggle">Toggle</SidebarToggle>
+          <TestComponent />
         </SidebarProvider>,
       );
 
-      const toggle = getByTestId("toggle");
+      const toggle = getByText("Toggle");
+      fireEvent.click(toggle);
+
+      expect(warnSpy).toHaveBeenCalledWith(
+        "Sidebar is not mounted. Please mount the Sidebar before toggling.",
+      );
+    });
+
+    it("doesn't warn if toggleSidebar is called without mounting sidebar in production mode", () => {
+      vi.stubEnv("NODE_ENV", "production");
+
+      const { getByText } = render(
+        <SidebarProvider>
+          <TestComponent />
+        </SidebarProvider>,
+      );
+
+      const toggle = getByText("Toggle");
       fireEvent.click(toggle);
 
       expect(warnSpy).not.toHaveBeenCalledWith(
