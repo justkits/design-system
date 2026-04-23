@@ -147,13 +147,10 @@ importers:
   design/primitives/alert: {}
 
   design/primitives/foundations:
-    devDependencies:
-      '@vanilla-extract/css':
-        specifier: ^1.20.1
-        version: 1.20.1
-      '@vanilla-extract/rollup-plugin':
-        specifier: ^1.5.3
-        version: 1.5.3(rollup@4.60.2)
+    dependencies:
+      react:
+        specifier: ^19
+        version: 19.2.4
 
   design/primitives/headless-ui:
     dependencies:
@@ -191,8 +188,6 @@ importers:
       p-limit:
         specifier: ^7.3.0
         version: 7.3.0
-
-  design/primitives/theme: {}
 
   design/primitives/toast: {}
 
