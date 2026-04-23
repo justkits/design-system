@@ -47,7 +47,7 @@ describe("svg2tsx - corner cases", () => {
         options: { state: { componentName: variables.componentName } },
       });
       expect(result).toContain(
-        'import { IconProps } from "@justkits/svg2tsx";',
+        'import type { IconProps } from "@justkits/svg2tsx";',
       );
     });
   });

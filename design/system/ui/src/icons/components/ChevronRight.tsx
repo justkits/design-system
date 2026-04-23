@@ -1,4 +1,4 @@
-import { IconProps } from "@justkits/svg2tsx";
+import type { IconProps } from "@justkits/svg2tsx";
 export function ChevronRight({ size = 16, ...props }: Readonly<IconProps>) {
   return (
     <svg
