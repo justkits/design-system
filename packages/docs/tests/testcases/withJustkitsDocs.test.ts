@@ -26,6 +26,10 @@ describe("withJustkitsDocs", () => {
     reactStrictMode: true,
   };
 
+  beforeAll(() => {
+    vi.spyOn(console, "log").mockImplementation(() => {});
+  });
+
   beforeEach(() => {
     delete globalThis.__JUSTKITS_DOCS_STARTED__;
     delete globalThis.__JUSTKITS_DOCS_WATCHER__;
@@ -39,8 +43,14 @@ describe("withJustkitsDocs", () => {
     vi.clearAllMocks();
   });
 
+  afterAll(() => {
+    vi.restoreAllMocks();
+  });
+
   it("should initialize Scanner in production mode and return the nextConfig", () => {
-    const nextConfig = withJustkitsDocs(sampleNextConfig);
+    const nextConfig = withJustkitsDocs(sampleNextConfig)(
+      "phase-production-build",
+    );
 
     expect(globalThis.__JUSTKITS_DOCS_STARTED__).toBe(true);
     expect(globalThis.__JUSTKITS_DOCS_OUTPUT_DIR__).toBe(".next/");
@@ -51,7 +61,9 @@ describe("withJustkitsDocs", () => {
 
   it("should initialize Watcher in watch mode and return the nextConfig", () => {
     process.argv.push("--watch");
-    const nextConfig = withJustkitsDocs(sampleNextConfig);
+    const nextConfig = withJustkitsDocs(sampleNextConfig)(
+      "phase-production-build",
+    );
 
     expect(globalThis.__JUSTKITS_DOCS_WATCHER__).toBeDefined();
     expect(globalThis.__JUSTKITS_DOCS_OUTPUT_DIR__).toBe(".next/");
@@ -65,13 +77,13 @@ describe("withJustkitsDocs", () => {
       const processSpy = vi.spyOn(process, "on");
       process.argv.push("--watch");
 
-      withJustkitsDocs(sampleNextConfig);
+      withJustkitsDocs(sampleNextConfig)("phase-production-build");
       const exitCallsAfterFirst = processSpy.mock.calls.filter(
         ([event]) => event === "exit",
       ).length;
 
       // Second call: exitHandlerRegistered is now true, should not register again
-      withJustkitsDocs(sampleNextConfig);
+      withJustkitsDocs(sampleNextConfig)("phase-production-build");
       const exitCallsAfterSecond = processSpy.mock.calls.filter(
         ([event]) => event === "exit",
       ).length;
@@ -84,7 +96,7 @@ describe("withJustkitsDocs", () => {
     it("should not run Scanner if __JUSTKITS_DOCS_STARTED__ is already true", () => {
       globalThis.__JUSTKITS_DOCS_STARTED__ = true;
 
-      withJustkitsDocs(sampleNextConfig);
+      withJustkitsDocs(sampleNextConfig)("phase-production-build");
 
       expect(scannerRun).not.toHaveBeenCalled();
     });
@@ -104,7 +116,7 @@ describe("withJustkitsDocs", () => {
         });
 
       process.argv.push("--watch");
-      fresh(sampleNextConfig);
+      fresh(sampleNextConfig)("phase-production-build");
       exitHandler?.();
 
       expect(watcherClose).toHaveBeenCalled();

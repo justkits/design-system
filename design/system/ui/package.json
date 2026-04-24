@@ -1,6 +1,17 @@
 {
   "name": "@justkits/ui",
+  "description": "JustKits Design System",
+  "version": "0.0.0",
+  "private": false,
   "type": "module",
+  "keywords": [
+    "design-system",
+    "tokens",
+    "ui",
+    "reset-css",
+    "react",
+    "typescript"
+  ],
   "exports": {
     ".": {
       "types": "./dist/Provider.d.mts",
