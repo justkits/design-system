@@ -18,7 +18,6 @@ export function SidebarToggle({ children, ...rest }: Props) {
   return (
     <Button
       variant="transparent"
-      size="small"
       {...rest}
       onClick={toggleSidebar}
       aria-controls={contentId}
