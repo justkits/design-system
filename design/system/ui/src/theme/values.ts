@@ -40,7 +40,7 @@ export const themeColors: ColorTokens = {
   error: baseColors.RED,
   info: baseColors.SILVER,
   background: `light-dark(${baseColors.WHITE.light}, ${baseColors.BLACK.dark})`,
-  backgroundHover: `light-dark(${baseColors.SILVER}25, ${baseColors.SILVER}CC)`,
+  backgroundHover: `${baseColors.SILVER}25`,
   surface: `light-dark(${baseColors.WHITE.medium}, ${baseColors.BLACK.medium})`,
   overlay: `light-dark(${baseColors.BLACK.medium}80, ${baseColors.SILVER}80)`,
   text: `light-dark(${baseColors.BLACK.dark}, ${baseColors.WHITE.light})`,
