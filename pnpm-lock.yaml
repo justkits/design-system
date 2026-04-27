@@ -264,10 +264,6 @@ importers:
       react-dom:
         specifier: ^19
         version: 19.2.4(react@19.2.4)
-    devDependencies:
-      '@justkits/ui':
-        specifier: workspace:*
-        version: link:../../design/system/ui
 
 packages:
 
