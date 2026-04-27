@@ -1,4 +1,4 @@
-import { render } from "@testing-library/react";
+import { fireEvent, render } from "@testing-library/react";
 
 import { Button } from "@/components/Button";
 
@@ -15,7 +15,7 @@ describe("Button", () => {
 
   it("handles asChild prop correctly", () => {
     const buttonClick = vi.fn();
-    const linkClick = vi.fn();
+    const linkClick = vi.fn((e) => e.preventDefault());
 
     const { getByTestId } = render(
       <Button
@@ -26,7 +26,7 @@ describe("Button", () => {
         style={{ color: "red" }}
       >
         <a
-          href="test/"
+          href="./test/"
           className="a-class"
           onClick={linkClick}
           style={{ textDecoration: "underline" }}
@@ -41,13 +41,13 @@ describe("Button", () => {
     expect(button.tagName).toBe("A");
 
     // props가 제대로 전달되는지 확인
-    expect(button.getAttribute("href")).toBe("test/");
+    expect(button.getAttribute("href")).toBe("./test/");
     expect(button.className).toBe("button-class a-class");
     expect(button.style.color).toBe("red");
     expect(button.style.textDecoration).toBe("underline");
 
     // 이벤트 핸들러가 제대로 체이닝되는지 확인
-    button.click();
+    fireEvent.click(button);
     expect(linkClick).toHaveBeenCalledTimes(1);
     expect(buttonClick).toHaveBeenCalledTimes(1);
   });
