@@ -193,6 +193,31 @@ importers:
 
   design/primitives/toast: {}
 
+  design/system/navigation:
+    dependencies:
+      react:
+        specifier: ^19
+        version: 19.2.4
+      react-dom:
+        specifier: ^19
+        version: 19.2.4(react@19.2.4)
+    devDependencies:
+      '@justkits/headless-ui':
+        specifier: workspace:*
+        version: link:../../primitives/headless-ui
+      '@vanilla-extract/css':
+        specifier: ^1.20.1
+        version: 1.20.1
+      '@vanilla-extract/recipes':
+        specifier: ^0.5.7
+        version: 0.5.7(@vanilla-extract/css@1.20.1)
+      '@vanilla-extract/rollup-plugin':
+        specifier: ^1.5.3
+        version: 1.5.3(rollup@4.60.2)
+      clsx:
+        specifier: ^2.1.1
+        version: 2.1.1
+
   design/system/ui:
     dependencies:
       react:

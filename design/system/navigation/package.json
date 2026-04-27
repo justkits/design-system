@@ -1,0 +1,31 @@
+{
+  "name": "@justkits/navigation",
+  "description": "",
+  "version": "0.0.0",
+  "private": false,
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.mjs"
+    }
+  },
+  "scripts": {
+    "prebuild": "rm -rf dist",
+    "build": "tsdown",
+    "dev": "tsdown --watch",
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@justkits/headless-ui": "workspace:*",
+    "@vanilla-extract/css": "^1.20.1",
+    "@vanilla-extract/recipes": "^0.5.7",
+    "@vanilla-extract/rollup-plugin": "^1.5.3",
+    "clsx": "^2.1.1"
+  },
+  "peerDependencies": {
+    "react": "^19",
+    "react-dom": "^19"
+  }
+}
