@@ -129,12 +129,21 @@ export class Scanner {
     name: string,
     indexPath: string,
   ): DocsBranch {
-    const children = this.buildTree(fullPath, `${route}/${slug}`);
-    if (children.length === 0) {
+    const allChildren = this.buildTree(fullPath, `${route}/${slug}`);
+    if (allChildren.length === 0) {
       console.warn(
         `⚠️ [Justkits Docs] Branch "${name}" only has index.mdx and no other children. Consider adding content or converting it to a leaf.`,
       );
     }
+    const children = allChildren.filter((child): child is DocsLeaf => {
+      if (child.type !== "leaf") {
+        console.warn(
+          `⚠️ [Justkits Docs] Branch "${name}" contains a non-leaf child "${child.label}". Only leaves are allowed inside branches. Skipping.`,
+        );
+        return false;
+      }
+      return true;
+    });
     const { label, ...fields } = this.parseFrontmatter(indexPath);
     return {
       type: "branch",
@@ -153,12 +162,23 @@ export class Scanner {
     order: number,
     name: string,
   ): DocsGroup {
-    const children = this.buildTree(fullPath, route);
-    if (children.length === 0) {
+    const allChildren = this.buildTree(fullPath, route);
+    if (allChildren.length === 0) {
       console.warn(
         `⚠️ [Justkits Docs] Group "${name}" has no children. Consider adding content or converting it to a leaf.`,
       );
     }
+    const children = allChildren.filter(
+      (child): child is DocsBranch | DocsLeaf => {
+        if (child.type === "group") {
+          console.warn(
+            `⚠️ [Justkits Docs] Group "${name}" contains a nested group "${child.label}". Nested groups are not allowed. Skipping.`,
+          );
+          return false;
+        }
+        return true;
+      },
+    );
     return {
       type: "group",
       order,

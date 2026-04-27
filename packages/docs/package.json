@@ -1,8 +1,8 @@
 {
   "name": "@justkits/docs",
   "description": "JustKits Docs - Automated Sidebar Generation for Documentation Websites",
-  "version": "0.0.3",
-  "private": false,
+  "version": "0.0.0",
+  "private": true,
   "type": "module",
   "keywords": [
     "documentation",
@@ -29,9 +29,9 @@
       "types": "./dist/next.d.mts",
       "default": "./dist/next.mjs"
     },
-    "./sidebar": {
-      "types": "./dist/sidebar.d.mts",
-      "default": "./dist/sidebar.mjs"
+    ".": {
+      "types": "./dist/index.d.mts",
+      "default": "./dist/index.mjs"
     }
   },
   "scripts": {
@@ -55,8 +55,5 @@
       "eslint",
       "prettier --check"
     ]
-  },
-  "devDependencies": {
-    "@justkits/ui": "workspace:*"
   }
 }

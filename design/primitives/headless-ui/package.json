@@ -2,7 +2,7 @@
   "name": "@justkits/headless-ui",
   "description": "JustKits Design Primitives - Headless UI",
   "version": "0.0.0",
-  "private": false,
+  "private": true,
   "type": "module",
   "keywords": [
     "headless-ui",

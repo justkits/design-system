@@ -70,6 +70,9 @@ describe("withJustkitsDocs", () => {
     expect(nextConfig).toBe(sampleNextConfig);
     expect(watcherRun).toHaveBeenCalled();
     expect(scannerRun).not.toHaveBeenCalled();
+
+    // Clean up the watcher after test
+    globalThis.__JUSTKITS_DOCS_WATCHER__?.close();
   });
 
   describe("corner cases", () => {

@@ -2,7 +2,7 @@
   "name": "@justkits/navigation",
   "description": "",
   "version": "0.0.0",
-  "private": false,
+  "private": true,
   "type": "module",
   "exports": {
     ".": {

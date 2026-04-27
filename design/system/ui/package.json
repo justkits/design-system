@@ -2,7 +2,7 @@
   "name": "@justkits/ui",
   "description": "JustKits Design System",
   "version": "0.0.0",
-  "private": false,
+  "private": true,
   "type": "module",
   "keywords": [
     "design-system",

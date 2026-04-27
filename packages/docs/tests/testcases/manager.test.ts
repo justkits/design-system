@@ -132,7 +132,121 @@ describe("Scanner", () => {
     );
   });
 
+  it("should warn if branch has group as child", () => {
+    // @ts-expect-error - 테스트 환경에서 readdirSync의 타입은 간략하게 처리
+    vi.spyOn(fs, "readdirSync").mockImplementation((path) => {
+      if (path.toString().endsWith("contents")) {
+        // 첫번째는 pages
+        return [{ name: "page", isDirectory: () => true }];
+      }
+      if (path.toString().endsWith("page")) {
+        // 두번째는 group과 branch
+        return [{ name: "02-Branch", isDirectory: () => true }];
+      }
+      if (path.toString().endsWith("02-Branch")) {
+        return [
+          { name: "01-Group", isDirectory: () => true },
+          { name: "index.mdx", isDirectory: () => false },
+        ];
+      }
+      return [{ name: "01-content.mdx", isDirectory: () => false }];
+    });
+
+    const scanner = new Scanner({
+      contentsDir: "test-contents",
+      outputDir: "test-output",
+      baseUrl: "/docs",
+    });
+
+    scanner.run();
+
+    expect(warnSpy).toHaveBeenCalledWith(
+      expect.stringContaining(
+        '⚠️ [Justkits Docs] Branch "02-Branch" contains a non-leaf child "Group". Only leaves are allowed inside branches. Skipping.',
+      ),
+    );
+  });
+
+  it("should warn if branch has another branch as child", () => {
+    // @ts-expect-error - 테스트 환경에서 readdirSync의 타입은 간략하게 처리
+    vi.spyOn(fs, "readdirSync").mockImplementation((path) => {
+      if (path.toString().endsWith("contents")) {
+        // 첫번째는 pages
+        return [{ name: "page", isDirectory: () => true }];
+      }
+      if (path.toString().endsWith("page")) {
+        // 두번째는 group과 branch
+        return [{ name: "02-Branch", isDirectory: () => true }];
+      }
+      if (path.toString().endsWith("02-Branch")) {
+        return [
+          { name: "01-Group", isDirectory: () => true },
+          { name: "index.mdx", isDirectory: () => false },
+        ];
+      }
+      return [
+        { name: "01-content.mdx", isDirectory: () => false },
+        { name: "index.mdx", isDirectory: () => false },
+      ];
+    });
+
+    const scanner = new Scanner({
+      contentsDir: "test-contents",
+      outputDir: "test-output",
+      baseUrl: "/docs",
+    });
+
+    scanner.run();
+
+    expect(warnSpy).toHaveBeenCalledWith(
+      expect.stringContaining(
+        '⚠️ [Justkits Docs] Branch "02-Branch" contains a non-leaf child "Group". Only leaves are allowed inside branches. Skipping.',
+      ),
+    );
+  });
+
+  it("should warn if group has another group as child", () => {
+    vi.spyOn(fs, "existsSync").mockImplementation((path) => {
+      if (path.toString().endsWith("01-Group/index.mdx")) return false;
+      if (path.toString().endsWith("01-SubGroup/index.mdx")) return false;
+      return true;
+    });
+    // @ts-expect-error - 테스트 환경에서 readdirSync의 타입은 간략하게 처리
+    vi.spyOn(fs, "readdirSync").mockImplementation((path) => {
+      if (path.toString().endsWith("contents")) {
+        // 첫번째는 pages
+        return [{ name: "page", isDirectory: () => true }];
+      }
+      if (path.toString().endsWith("page")) {
+        // 두번째는 group과 branch
+        return [{ name: "01-Group", isDirectory: () => true }];
+      }
+      if (path.toString().endsWith("01-Group")) {
+        return [
+          { name: "01-SubGroup", isDirectory: () => true },
+          { name: "02-content.mdx", isDirectory: () => false },
+        ];
+      }
+      return [{ name: "01-content.mdx", isDirectory: () => false }];
+    });
+
+    const scanner = new Scanner({
+      contentsDir: "test-contents",
+      outputDir: "test-output",
+      baseUrl: "/docs",
+    });
+
+    scanner.run();
+
+    expect(warnSpy).toHaveBeenCalledWith(
+      expect.stringContaining(
+        '⚠️ [Justkits Docs] Group "01-Group" contains a nested group "SubGroup". Nested groups are not allowed. Skipping.',
+      ),
+    );
+  });
+
   it("should throw if dir name does not follow expected format", () => {
+    // 숫자-슬러그 형식이어야 한다.
     // @ts-expect-error - 테스트 환경에서 readdirSync의 타입은 간략하게 처리
     vi.spyOn(fs, "readdirSync").mockImplementation((path) => {
       if (path.toString().endsWith("contents")) {

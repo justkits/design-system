@@ -2,7 +2,7 @@
   "name": "@justkits/alert",
   "description": "JustKits Design Primitives - Alert",
   "version": "0.0.0",
-  "private": false,
+  "private": true,
   "type": "module",
   "keywords": [
     "alert",
