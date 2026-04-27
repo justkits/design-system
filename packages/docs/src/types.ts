@@ -14,7 +14,7 @@ export type DocsBranch = {
   order: number;
   label: string;
   href: string;
-  children: DocsNode[];
+  children: DocsLeaf[];
   fields: JustkitsDocsFrontmatter;
 };
 
@@ -22,7 +22,7 @@ export type DocsGroup = {
   type: "group";
   order: number;
   label: string;
-  children: DocsNode[];
+  children: (DocsBranch | DocsLeaf)[];
 };
 
 export type DocsNode = DocsLeaf | DocsBranch | DocsGroup;
