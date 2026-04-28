@@ -1,6 +1,6 @@
 import { fireEvent, render, renderHook } from "@testing-library/react";
 
-import { Sidebar, SidebarProvider } from "@/sidebar";
+import { SidebarMain, SidebarProvider } from "@/sidebar";
 import { useSidebar, useInternalSidebar } from "@/sidebar/contexts/sidebar";
 
 function TestComponent() {
@@ -58,20 +58,6 @@ describe("Sidebar - corner cases", () => {
     );
   });
 
-  it("doesn't warn if multiple sidebars are mounted in production mode", () => {
-    vi.stubEnv("NODE_ENV", "production");
-
-    render(
-      <SidebarProvider>
-        <Sidebar>asdfjkl;</Sidebar>
-      </SidebarProvider>,
-    );
-
-    expect(warnSpy).not.toHaveBeenCalledWith(
-      "Multiple sidebars detected. Please ensure only one sidebar is mounted at a time.",
-    );
-  });
-
   it("doesn't warn if toggleSidebar is called without mounting sidebar in production mode", () => {
     vi.stubEnv("NODE_ENV", "production");
 
@@ -86,6 +72,36 @@ describe("Sidebar - corner cases", () => {
 
     expect(warnSpy).not.toHaveBeenCalledWith(
       "Sidebar is not mounted. Please mount the Sidebar before toggling.",
+    );
+  });
+
+  it("warns in console if multiple sidebars are mounted", () => {
+    vi.stubEnv("NODE_ENV", "development");
+
+    render(
+      <SidebarProvider>
+        <SidebarMain>First Sidebar</SidebarMain>
+        <SidebarMain>Second Sidebar</SidebarMain>
+      </SidebarProvider>,
+    );
+
+    expect(warnSpy).toHaveBeenCalledWith(
+      "Multiple sidebars detected. Please ensure only one sidebar is mounted at a time.",
+    );
+  });
+
+  it("doesn't warn if multiple sidebars are mounted in production mode", () => {
+    vi.stubEnv("NODE_ENV", "production");
+
+    render(
+      <SidebarProvider>
+        <SidebarMain>asdfjkl;</SidebarMain>
+        <SidebarMain>asdfjkl;</SidebarMain>
+      </SidebarProvider>,
+    );
+
+    expect(warnSpy).not.toHaveBeenCalledWith(
+      "Multiple sidebars detected. Please ensure only one sidebar is mounted at a time.",
     );
   });
 });
