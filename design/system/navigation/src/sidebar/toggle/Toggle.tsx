@@ -1,6 +1,6 @@
 import { Button, type ButtonProps } from "@justkits/headless-ui/Button";
 
-import { useInternalSidebar, useSidebar } from "@/sidebar/contexts/sidebar";
+import { useInternalSidebar, useSidebar } from "../contexts/sidebar";
 
 export function SidebarToggle({
   children,
