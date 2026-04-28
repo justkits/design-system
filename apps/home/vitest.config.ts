@@ -3,7 +3,12 @@ import { nextConfig } from "@justkits/vitest-config/next";
 
 const appConfig = defineProject({
   test: {
-    setupFiles: ["./tests/mocks.tsx"],
+    setupFiles: [
+      "./tests/mocks/ui.tsx",
+      "./tests/mocks/navigation.tsx",
+      "./tests/mocks/docs.ts",
+      "./tests/mocks/rest.ts",
+    ],
   },
 });
 
