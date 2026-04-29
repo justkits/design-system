@@ -6,19 +6,27 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint .",
-    "icons": "svg2tsx generate && prettier --write src/06.shared/ui/Icons"
+    "lint": "eslint ."
   },
   "dependencies": {
-    "@vanilla-extract/css": "^1.20.1",
-    "@vanilla-extract/recipes": "^0.5.7",
-    "clsx": "^2.1.1",
+    "@justkits/docs": "workspace:*",
+    "@justkits/navigation": "workspace:*",
+    "@justkits/ui": "workspace:*",
+    "@vanilla-extract/css": "catalog:",
+    "@vanilla-extract/recipes": "catalog:",
+    "clsx": "catalog:",
     "next": "16.2.3",
-    "react": "19.2.4",
-    "react-dom": "19.2.4"
+    "react": "19.2.5",
+    "react-dom": "19.2.5"
   },
   "devDependencies": {
     "@vanilla-extract/next-plugin": "^2.5.1",
     "babel-plugin-react-compiler": "1.0.0"
-  }
+  },
+  "browserslist": [
+    "chrome >= 123",
+    "firefox >= 120",
+    "safari >= 17.5",
+    "edge >= 123"
+  ]
 }

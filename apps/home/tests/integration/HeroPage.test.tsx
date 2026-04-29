@@ -1,6 +1,6 @@
 import { render } from "@testing-library/react";
 
-import { HeroPage } from "@pages/hero";
+import { HeroPage } from "@/domains/root";
 
 describe("HeroPage", () => {
   it("renders without crashing", () => {

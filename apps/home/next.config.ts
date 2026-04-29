@@ -1,5 +1,6 @@
 import type { NextConfig } from "next";
 import { createVanillaExtractPlugin } from "@vanilla-extract/next-plugin";
+import { withJustkitsDocs, type JustkitsDocsConfig } from "@justkits/docs/next";
 
 const withVanillaExtract = createVanillaExtractPlugin({
   unstable_turbopack: { mode: "on" },
@@ -10,4 +11,11 @@ const nextConfig: NextConfig = {
   reactCompiler: true,
 };
 
-export default withVanillaExtract(nextConfig);
+const justkitsDocsConfig: JustkitsDocsConfig = {
+  contentsDir: "docs",
+};
+
+export default withJustkitsDocs(
+  withVanillaExtract(nextConfig),
+  justkitsDocsConfig,
+);

@@ -3,6 +3,9 @@ import { vanillaExtractPlugin } from "@vanilla-extract/vite-plugin";
 import react from "@vitejs/plugin-react";
 
 export const sharedConfig = defineConfig({
+  server: {
+    watch: null,
+  },
   resolve: {
     tsconfigPaths: true,
   },
@@ -15,6 +18,9 @@ export const sharedConfig = defineConfig({
 
 export const sharedReactConfig = defineConfig({
   plugins: [react(), vanillaExtractPlugin()],
+  server: {
+    watch: null,
+  },
   resolve: {
     tsconfigPaths: true,
   },

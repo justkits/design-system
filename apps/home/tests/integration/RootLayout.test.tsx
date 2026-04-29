@@ -1,6 +1,6 @@
 import { render } from "@testing-library/react";
 
-import { RootLayout } from "@app/root";
+import { RootLayout } from "@/domains/root";
 import { rootLayoutSetup } from "../_setup";
 
 describe("RootLayout", () => {

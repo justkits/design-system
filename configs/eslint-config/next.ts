@@ -7,7 +7,11 @@ import { reactPackageEslintConfig } from "./react";
 
 export const nextEslintConfig = defineConfig([
   {
-    extends: [reactPackageEslintConfig, reactRefresh.configs.next],
+    extends: [reactPackageEslintConfig],
+  },
+  {
+    files: ["**/src/**/*.{ts,tsx}"],
+    extends: [reactRefresh.configs.next],
   },
   ...nextVitals,
   ...nextTs,
