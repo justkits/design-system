@@ -1,9 +1,4 @@
-import {
-  type ReactElement,
-  type ReactNode,
-  cloneElement,
-  isValidElement,
-} from "react";
+import { cloneElement, isValidElement } from "react";
 
 type AnyProps = Record<string, unknown>;
 
@@ -40,13 +35,13 @@ function mergeProps(props: AnyProps, childProps: AnyProps): AnyProps {
 }
 
 type AsChildProps = {
-  children: ReactNode;
+  children: React.ReactNode;
 } & AnyProps;
 
 export function AsChild({
   children,
   ...props
-}: AsChildProps): ReactElement | null {
+}: AsChildProps): React.ReactElement | null {
   if (!isValidElement(children)) {
     if (process.env.NODE_ENV !== "production") {
       console.warn(
