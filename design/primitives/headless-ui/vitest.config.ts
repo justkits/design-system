@@ -5,6 +5,7 @@ import { sharedReactConfig } from "@justkits/vitest-config/shared";
 const config = defineProject({
   test: {
     root: __dirname,
+    setupFiles: ["./tests/mocks.ts"],
   },
 });
 
