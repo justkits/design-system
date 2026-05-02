@@ -12,3 +12,13 @@ export function setupSSR() {
     vi.stubGlobal("document", originalDocument);
   });
 }
+
+export function setupTimer() {
+  beforeEach(() => {
+    vi.useFakeTimers();
+  });
+
+  afterEach(() => {
+    vi.useRealTimers();
+  });
+}

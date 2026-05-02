@@ -17,13 +17,13 @@ export function useClickOutside(
 ) {
   const downRef = useRef<boolean>(false);
 
-  const activationQuery = (target: Node) => {
-    return (
-      ref.current?.contains(target) || excludeRef?.current?.contains(target)
-    );
-  };
-
   useEffect(() => {
+    const activationQuery = (target: Node) => {
+      return (
+        ref.current?.contains(target) || excludeRef?.current?.contains(target)
+      );
+    };
+
     const handleDown = (event: Event) => {
       downRef.current = !activationQuery(event.target as Node);
     };
